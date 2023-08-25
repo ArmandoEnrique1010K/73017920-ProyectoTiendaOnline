@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <!-- CREACIÓN DE LA PLANTILLA DE LA BARRA DE MENÚ -->
+        <!-- NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
+        <div th:fragment = "fragmento-cabecera">
+            <div>
+                <a th:href="@{/productos}">Todos los productos</a>
+            </div>
+            <div th:each="seccion: ${categorias}">
+                
+                <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
+                    <span th:text="${seccion.nombre}"></span>
+                </a>
+                
+            </div>           
+            <div>Productos en Oferta</div>
+        </div>
+        
+    </body>
+</html>

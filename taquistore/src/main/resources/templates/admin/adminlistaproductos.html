@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Administrador - Lista de Productos</h1>
+
+        <!-- UBICACIÓN Y NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
+        <h2>Barra de menu</h2>
+        <!-- INSERTAR LA PLANTILLA DE LA BARRA DE MENÚ -->
+        <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
+
+        <h3>Filtros</h3>
+        <form th:action="@{/admin/productos}" method="GET">
+            <!-- MENU DE FILTROS -->
+            <!-- INSERTAR LA PLANTILLA DEL FILTRO POR CATEGORIA -->
+            <div th:insert="fragments/filtros-busqueda :: fragmento-categoria"></div>
+            <!-- INSERTAR LA PLANTILLA DEL FILTRO POR MARCA -->
+            <div th:insert="fragments/filtros-busqueda :: fragmento-marca"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-precio"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-oferta"></div>
+
+            <input type="submit" value="Filtrar">
+        </form>        
+        <h3>Lista de productos</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Oferta</th>
+                    <th>Precio normal</th>
+                    <th>Precio de oferta</th>
+                    <th>Estado Producto</th>
+                    <th>Categoria</th>
+                    <th>Estado Categoria</th>
+                    <th>Marca</th>
+                    <th>Estado Marca</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="registro: ${productos}">
+                    <td th:text="${registro.id_producto}"></td>
+                    <td th:text="${registro.nombre}"></td>
+                    <td th:text="${registro.oferta}"></td>
+                    <td th:text="${registro.precionormal}"></td>
+                    <td th:text="${registro.preciooferta}"></td>
+                    <td th:text="${registro.estado}"></td>
+                    <!-- OBTENER LOS VALORES "NOMBRE" Y "ESTADO" DE CADA UNA DE LAS TABLAS A LA QUE ESTA RELACIONADA PRODUCTOS -->
+                    <td th:text="${registro.categoriaEntity.nombre}"></td>
+                    <td th:text="${registro.categoriaEntity.estado}"></td>
+                    <td th:text="${registro.marcaEntity.nombre}"></td>
+                    <td th:text="${registro.marcaEntity.estado}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
+

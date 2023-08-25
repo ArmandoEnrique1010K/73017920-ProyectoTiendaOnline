@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1><span th:each="categoriaunica : ${categoriaactual}" th:text="${categoriaunica.nombre}"></span></h1>
+
+        <!-- UBICACIÓN Y NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
+        <h2>Barra de menu</h2>
+        <!-- INSERTAR LA PLANTILLA DE LA BARRA DE MENÚ -->
+        <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
+
+        <h3>Filtros</h3>
+        <form th:each="categoriaunica : ${categoriaactual}" th:action="@{/productos/{nombre}(nombre=${categoriaunica.nombre})}" method="GET">
+            <!-- MENU DE FILTROS -->
+            <!-- INSERTAR LA PLANTILLA DEL FILTRO POR CATEGORIA -->
+            <!-- INSERTAR LA PLANTILLA DEL FILTRO POR MARCA -->
+            <div th:insert="fragments/filtros-busqueda :: fragmento-marca"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-precio"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-oferta"></div>
+
+            <input type="submit" value="Filtrar">
+        </form>    
+        <div>
+            <div th:insert="fragments/cuadros-productos :: fragmento-productos"></div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Filtros de busqueda</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div th:fragment = "fragmento-marca">
+            <h3>Marca</h3>
+            <div th:each="marca : ${marcas}">
+                <label>
+                    <input type="checkbox" name="p-marcas" th:value="${marca.id_marca}">
+                    <span th:text="${marca.nombre}"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div th:fragment = "fragmento-categoria">
+            <h3>Categoria</h3>
+            <div th:each="categoria : ${categorias}">          
+                <label>
+                    <input type="radio" name="p-categoria" th:value="${categoria.id_categoria}">
+                    <span th:text="${categoria.nombre}"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div th:fragment = "fragmento-precio">
+            <h3>Precio</h3>
+            <div>
+                <label>Minimo: </label>
+                <input type="text" name="p-min">
+            </div>
+            <div>
+                <label>Maximo: </label>
+                <input type="text" name="p-max">
+            </div>
+        </div>
+
+        <div th:fragment = "fragmento-oferta">
+            <h3>Oferta</h3>
+            <div>
+                <label>
+                    <input type="checkbox" name="p-oferta" value="on">
+                    <span>Oferta</span>
+                </label>
+            </div>
+            
+        </div>
+        
+    </body>
+</html>
