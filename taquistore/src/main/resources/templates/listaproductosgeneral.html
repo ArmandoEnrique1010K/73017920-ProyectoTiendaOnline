@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Comprar todo | Taqui Store</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link th:href="@{/style.css}" rel="stylesheet">
+
+    </head>
+    <body>
+        
+        <!-- INSERTAR LA PLANTILLA DE LA CABECERA -->
+        <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
+        <!-- UBICACIÓN Y NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
+        <h1>Comprar todo</h1>
+        <form th:action="@{/productos}" autocomplete="off" method="GET">
+            <h2>Filtrar por</h2>
+            <!-- MENU DE FILTROS -->
+            <!-- INSERTAR LA PLANTILLA DEL FILTRO POR CATEGORIA -->
+            
+            
+            
+            <div th:insert="fragments/filtros-busqueda :: fragmento-categoria"></div>
+            
+            <!-- INSERTAR LA PLANTILLA DEL FILTRO POR MARCA -->
+            <div th:insert="fragments/filtros-busqueda :: fragmento-marca"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-precio"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-oferta"></div>
+
+            <input type="submit" value="Filtrar">
+        </form>    
+        <div>
+            <div th:insert="fragments/cuadros-productos :: fragmento-productos"></div>
+        </div>
+
+        <script>
+            const queryParams = new URLSearchParams(window.location.search);
+queryParams.set('p-categoria', nuevaCategoriaId);
+queryParams.set('p-marcas', nuevasMarcas.join(','));
+// Agregar otros parámetros según sea necesario
+const nuevaURL = `${window.location.pathname}?${queryParams.toString()}`;
+window.history.pushState({}, '', nuevaURL);
+
+        </script>
+    </body>
+</html>

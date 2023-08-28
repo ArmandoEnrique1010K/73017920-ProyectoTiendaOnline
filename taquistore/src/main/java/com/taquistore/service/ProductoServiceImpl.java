@@ -33,5 +33,10 @@ public class ProductoServiceImpl implements ProductoService{
     public List<ProductoEntity> ListarProductosPorFiltrosDeBusqueda(Long categoriaId, List<Long> marcaIds, Double minPrecio, Double maxPrecio, Boolean enOferta, String palabraClave) {
         return productoRepository.findAllByParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave);
     }
+
+    @Override
+    public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(Long categoriaId, List<Long> marcaIds, Double minPrecio, Double maxPrecio, Boolean enOferta, String palabraClave) {
+        return productoRepository.countAllByEstadoTrueAndParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave);
+    }
     
 }

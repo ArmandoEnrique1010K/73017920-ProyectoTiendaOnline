@@ -37,10 +37,14 @@ public class ProductosController {
             @RequestParam(value = "p-palabraclave", required = false) String palabraClave,
             Model modelo
     ){
-        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         modelo.addAttribute("marcas", marcaService.ListarMarcasByEstadoTrue());
-        return "listaproductos.html";
+        
+        
+        return "listaproductosgeneral.html";
     }
     
     @GetMapping("/{categoriaNombre}")
@@ -56,10 +60,54 @@ public class ProductosController {
     ){
         CategoriaEntity categoria = categoriaService.ObtenerCategoriaPorNombre(categoriaNombre);
     
-        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(categoria.getId_categoria(), marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                categoria.getId_categoria(), marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         modelo.addAttribute("categoriaactual", categoriaService.ObtenerCategoriaPorNombre(categoriaNombre));
         modelo.addAttribute("marcas", marcaService.ListarDistintasMarcasByGrupoCategoriaAndEstadoTrue(categoriaNombre));
         return "listaproductoscategoria.html";
     }
+    
+    @GetMapping("/oferta")
+    public String productosenoferta(
+            @RequestParam(value = "p-categoria", required = false) Long categoriaId,
+            @RequestParam(value = "p-marcas", required = false) List<Long> marcaIds,
+            @RequestParam(value = "p-min", required = false) Double minPrecio,
+            @RequestParam(value = "p-max", required = false) Double maxPrecio,
+            @RequestParam(value = "p-palabraclave", required = false) String palabraClave,
+            Model modelo    
+    ) {
+        /* Todos los productos están en oferta, por lo tanto no se va a requerir del parametro oferta */
+        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                categoriaId, marcaIds, minPrecio, maxPrecio, true, palabraClave));
+        
+        modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
+        modelo.addAttribute("marcas", marcaService.ListarMarcasByEstadoTrue());
+        return "listaproductosoferta.html";
+    }
+    
+    
+    @GetMapping("/buscar")
+    public String productosbusqueda(
+            @RequestParam(value = "p-categoria", required = false) Long categoriaId,
+            @RequestParam(value = "p-marcas", required = false) List<Long> marcaIds,
+            @RequestParam(value = "p-min", required = false) Double minPrecio,
+            @RequestParam(value = "p-max", required = false) Double maxPrecio,
+            @RequestParam(value = "p-oferta", required = false) Boolean enOferta,
+            @RequestParam(value = "p-palabraclave", required = false) String palabraClave,
+            Model modelo
+    ){
+        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        
+        modelo.addAttribute("contarproductos", productoService.ContarProductosHabilitadosPorFiltrosDeBusqueda(
+                categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        
+        modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
+        modelo.addAttribute("marcas", marcaService.ListarMarcasByEstadoTrue());
+        modelo.addAttribute("palabraClave", palabraClave);
+        return "listaproductosbusqueda.html";
+    }
+    
 }

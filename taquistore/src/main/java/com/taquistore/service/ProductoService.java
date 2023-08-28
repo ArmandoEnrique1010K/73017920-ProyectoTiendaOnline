@@ -15,6 +15,17 @@ public interface ProductoService {
             String palabraClave
     );
     
+    public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(
+            Long categoriaId,
+            List<Long> marcaIds,
+            Double minPrecio,
+            Double maxPrecio,
+            Boolean enOferta,
+            String palabraClave
+    );
+    
+    
+    
     
     public List<ProductoEntity> ListarTodo();
     
@@ -26,6 +37,7 @@ public interface ProductoService {
             Boolean enOferta,
             String palabraClave
     );
+    
     
     
 }

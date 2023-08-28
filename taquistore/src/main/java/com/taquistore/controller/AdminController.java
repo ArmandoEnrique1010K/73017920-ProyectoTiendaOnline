@@ -37,7 +37,7 @@ public class AdminController {
         modelo.addAttribute("productos", productoService.ListarProductosPorFiltrosDeBusqueda(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
         modelo.addAttribute("categorias", categoriaService.ListarCategorias());
         modelo.addAttribute("marcas", marcaService.ListarMarcas());
-        return "/admin/adminlistaproductos";
+        return "admin/adminlistaproductos";
     }
 
 

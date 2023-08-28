@@ -1,10 +1,424 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+/* DEFINIR AQUI LAS "VARIABLES" QUE SE VAN A UTILIZAR */
+:root{
+    --color-blanco: rgb(255, 255, 255);
+    --color-negro: rgb(0, 0, 0);
+    --color-primario: rgb(219, 239, 225);
+    --color-secundario: rgb(63, 134, 146);
+    --color-terciario: rgb(13, 97, 106);
+    --tipo-fuente-1: 'Roboto', sans-serif;
+    --tamaño-fuente-1: 14px;
+    --tamaño-fuente-2: 15px;
+
+}
+
+/* REINICIAR ESTILOS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--tipo-fuente-1);
+}
+
+/* OCULTAR LAS CLASES QUE VAN A CONFORMAR EL DISEÑO PARA DISPOSITIVOS MOVILES */
+.movile-caja-cabecera-2{
+    display: none;
+}
+
+.movile-caja-cabecera-3{
+    display: none;
+}
+
+.movile-caja-categorias{
+    display: none;
+}
+
+.menu-hamburguesa-caja-categorias{
+    display: none;
+}
+
+
+/* ESTILOS PARA LA CABECERA */
+.caja-cabecera{
+    display: block;
+    width: 100%;
+}
+
+/* PRIMERA CAJA - CABECERA */
+.caja-cabecera-1{
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* CAJA CABECERA DE LA IZQUIERDA*/
+.caja-cabecera-1-1{
+    display: flex;
+    align-items: center;
+    padding: 1em;
+}
+
+/* ICONO DE UN PAQUETE */
+.imagen-cabecera-1-1{
+    width: 32px;
+    height: 32px;
+    margin-right: 1em;
+    margin-left: 2em;
+}
+
+/* TEXTO A LADO DEL ICONO*/
+.texto-cabecera-1-1{
+    font-size: var(--tamaño-fuente-1);
+}
+
+/* BARRA DE MENÚ GENERAL */
+.caja-cabecera-1-2{
+    display: flex;
+    align-items: center;
+    margin-right: 2em;
+}
+
+/* CADA BOTÓN, INCLUYENDO EL TEXTO */
+.texto-cabecera-1-2{
+    background-color: black;
+    text-decoration: none;
+    padding: 1em 0 1em 0;
+    margin: 0 1em;
+    color: var(--color-blanco);
+    font-size: var(--tamaño-fuente-1);
+    border-bottom: solid 0.2em black;
+    text-align: center;
+}
+
+.texto-cabecera-1-2:hover{
+    border-bottom-color: white;
+}
+
+
+
+
+
+/* SEGUNDA CAJA - CABECERA */
+.desktop-caja-cabecera-2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-blanco)
+}
+
+
+
+.caja-cabecera-2-1{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    
+    
+}
+
+.imagen-logo{
+    width: 100px;
+    padding: 0.5em 0;
+    margin-left: 2em;
+
+}
+
+
+.caja-cabecera-2-2 {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Esto permite que la caja se expanda horizontalmente */
+    margin: 0 2em;
+}
+
+.caja-formulario-busqueda {
+    display: flex;
+    width: 100%; /* La barra de búsqueda ocupará todo el ancho disponible */
+}
+
+.input-barra-busqueda {
+    flex-grow: 1; /* Esto permite que el campo de búsqueda se expanda horizontalmente */
+    /* Resto de tus estilos... */
+    background-color: var(--color-primario);
+    border: none;
+    border-radius: 15px 0 0 15px;
+    padding: 1em;
+    color: var(--color-negro);
+
+}
+
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 23 ago 2023, 21:30:27
-    Author     : ENRIQUE
-    NOTA: DEFINIR UNA HOJA DE ESTILO 
+.caja-cabecera-2-2{
+    text-align: left;
+    align-content: center;
+    justify-content: flex-start;
+
+}
+
+.caja-formulario-busqueda{
+    display: flex;
+    text-align: left;
+
+}
+
+.input-barra-busqueda{
+    background-color: var(--color-secundario);
+    border: none;
+    border-radius: 15px 0 0 15px;
+    padding: 1em;
+    width: 100%;
+    max-width: 500px;
+    color: var(--color-negro);
+    margin: auto;
+}
 */
 
+.input-barra-busqueda:hover, .input-barra-busqueda:focus{
+    background-color: var(--color-blanco);
+    border: solid 2px var(--color-terciario);
+}
+
+.boton-barra-busqueda{
+    background-color: var(--color-terciario);
+    border: solid 2px var(--color-terciario);
+    padding: 0.6em 1.8em;
+    border-radius: 0 15px 15px 0;
+        cursor: pointer;
+
+}
+
+
+.imagen-boton-busqueda{
+    width: 24px;
+}
+
+.boton-barra-busqueda:hover{
+    background-color: var(--color-negro);
+    border: solid 2px var(--color-negro);
+}
+
+.caja-cabecera-2-3{
+    display: flex;
+    flex-direction: row;
+    margin-right: 2em 
+
+}
+
+.imagen-cabecera-2-3{
+    width: 32px;
+    margin-right: 0.5em;
+}
+
+.texto-cabecera-2-3 {
+    display: flex;
+    align-items: center;
+    /* margin: 0 1em; */
+    color: var(--color-negro);
+    text-decoration: none;
+    font-size: var(--tamaño-fuente-2);
+    padding: 0.5em 1em;
+    border-radius: 50px;
+}
+
+
+.texto-cabecera-2-3-4{
+    display: inline-block;
+    width: auto;
+    padding: 0 0.4em;
+    color: var(--color-blanco);
+    text-align: center;
+    background-color: black;
+    border-radius: 10px;
+}
+
+
+.texto-cabecera-2-3:hover{
+    background-color: var(--color-primario)
+        
+}
+
+/*
+
+
+.caja-cabecera-2-1{
+    text-align: center;
+    flex-grow: 2
+}
+
+.imagen-logo{
+    width: 100px
+}
+.caja-cabecera-2-2{
+    flex-grow: 4
+}
+
+
+
+.caja-cabecera-2-3{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+    align-items: center;
+    margin: 0 2em 0 0;
+    align-self: center;
+    align-items: center;
+
+}
+
+.caja-cabecera-2-3-1{
+}
+
+
+.imagen-cabecera-2-3-1{
+    width: 30px;
+}
+*/
+
+
+
+.desktop-caja-categorias{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    background-color: var(--color-primario);
+    padding: 0 0 0 2em;
+}
+
+.texto-categoria a{
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: var(--color-negro);
+    font-size: var(--tamaño-fuente-1)
+}
+
+.texto-categoria a:hover{
+    background-color: var(--color-secundario);
+
+    color: var(--color-blanco);
+}
+
+/* ADAPTABLE A MOVILES CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 800 pixeles*/
+@media (max-width: 850px){
+    
+    .caja-cabecera-1{
+        flex-direction: column;
+    }
+    
+    .caja-cabecera-1-1{
+        border-bottom: solid 0.1em var(--color-blanco);
+    }
+    
+    .caja-cabecera-1-2{
+        align-items: center;
+        justify-content: center;
+        padding: 0.5em 0;
+        margin: 0;
+    }
+    
+}
+
+@media (max-width: 945px){
+    
+    .desktop-caja-cabecera-2{
+        display: none;
+    }
+    
+    .desktop-caja-categorias{
+        display: none;
+    }
+    
+    .movile-caja-cabecera-2{
+        display: flex;
+    }
+    
+    .movile-caja-cabecera-3{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between
+    }
+    
+    .menu-hamburguesa-caja-categorias{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .abrir-menu{
+        border: 0;
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        align-items: center;
+    }
+    
+    .menu-hamburguesa-caja-categorias {
+        opacity: 0;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 1rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #1c1c1c;
+        padding: 2rem;
+        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+    }
+
+    .menu-hamburguesa-caja-categorias.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    
+    
+    
+    /*
+    .movile-caja-cabecera-2{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .movile-caja-cabecera-3{
+        display: block
+    }
+    
+    .movile-menu-caja-categorias{
+        height: 100%;
+        width: 100%;
+        background-color: red;
+        z-index: 9999;
+        text-align: center;
+    }
+    
+    .movile-menu-caja-categorias .texto-categoria{
+    text-decoration:none;
+
+    }
+    
+    .movile-menu-caja-categorias .texto-categoria a{
+        color: white
+    }
+
+    
+    .texto-cabecera-2-3-1, .texto-cabecera-2-3-2, .texto-cabecera-2-3-3{
+        display: none;
+    }
+    .imagen-logo{
+        width: 75px;
+    }
+    
+ */
+ 
+}

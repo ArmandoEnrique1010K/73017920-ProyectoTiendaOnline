@@ -4,24 +4,191 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+
     </head>
     <body>
-        
+
         <!-- CREACIÓN DE LA PLANTILLA DE LA BARRA DE MENÚ -->
-        <!-- NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
-        <div th:fragment = "fragmento-cabecera">
-            <div>
-                <a th:href="@{/productos}">Todos los productos</a>
+        <!-- NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO --> 
+
+        <div class="caja-cabecera" th:fragment = "fragmento-cabecera">
+            <div class="caja-cabecera-1">
+                <div class="caja-cabecera-1-1">
+                    <img class="imagen-cabecera-1-1" th:src="@{/img/box-icon.svg}">
+                    <div class="texto-cabecera-1-1">Envío gratis en compras superiores a S/1000</div>
+                </div>
+                <div class="caja-cabecera-1-2">
+                    <a class="texto-cabecera-1-2" href="#">Acerca de</a>
+                    <a class="texto-cabecera-1-2" href="#">Contacto</a>
+                    <a class="texto-cabecera-1-2" href="#">Asistencia</a>
+                    <a class="texto-cabecera-1-2" href="#">Llama +51-959253346</a>
+                </div>
             </div>
-            <div th:each="seccion: ${categorias}">
-                
+
+            <!-- CAJA CABECERA PARA EL USUARIO SI ESTA EN UNA COMPUTADORA CUYA PANTALLA SEA MAYOR QUE 945 PIXELES DE ANCHO-->
+            <div class="desktop-caja-cabecera-2">
+                <div class="caja-cabecera-2-1">
+                    <a th:href="@{/}">
+                        <img class="imagen-logo" th:src="@{/img/logo.png}">
+                    </a>
+                </div>
+                <!-- INICIO BARRA DE BUSQUEDA-->
+                <div class="caja-cabecera-2-2">
+                    <form class="caja-formulario-busqueda"  th:action="@{/productos/buscar}" method="GET">
+                        <input class="input-barra-busqueda"
+                               type="search" name="p-palabraclave" 
+                               placeholder="Buscar productos..." autocomplete="off" 
+                               th:value="${palabraClave}">
+                        <button class="boton-barra-busqueda" type="input">
+                            <img class="imagen-boton-busqueda" th:src="@{/img/search-icon.svg}">
+                        </button>
+                    </form>
+                </div>
+                <!-- FIN BARRA DE BUSQUEDA-->
+                <div class="caja-cabecera-2-3">
+
+                    <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                        <span class="texto-cabecera-2-3-1">Administradores</span>
+                    </a>
+
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
+                        <span class="texto-cabecera-2-3-2">Entrar</span>
+                    </a>
+
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/heart-icon.svg}">
+                        <span class="texto-cabecera-2-3-3">Favoritos</span>
+                    </a>
+
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/shopping-car-icon.svg}">
+                        <div class="texto-cabecera-2-3-4">0</div>
+                    </a>
+
+
+                </div>
+
+            </div>
+            <div class="desktop-caja-categorias">
+                <div class="texto-categoria">
+                    <a th:href="@{/productos}">Comprar todo</a>
+                </div>
+                <div class="texto-categoria" th:each="seccion: ${categorias}">
+
+                    <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
+                        <span th:text="${seccion.nombre}"></span>
+                    </a>
+
+                </div>           
+                <div class="texto-categoria">
+                    <a th:href="@{/productos/oferta}">Oferta</a>
+                </div>
+            </div>
+
+
+            <!-- PARA DISPOSITIVOS MOVILES / SOLO APARECE SI EL TAMAÑO DE LA PANTALLA ES MENOR -->
+            <div class="movile-caja-cabecera-2">
+
+                <div class="caja-cabecera-2-1">
+                    <a th:href="@{/}">
+                        <img class="imagen-logo" th:src="@{/img/logo.png}">
+                    </a>
+                </div>
+                <div class="caja-cabecera-2-2">
+                    <form class="caja-formulario-busqueda"  th:action="@{/productos/buscar}" method="GET">
+                        <input class="input-barra-busqueda"
+                               type="search" name="p-palabraclave" 
+                               placeholder="Buscar productos..." autocomplete="off" 
+                               th:value="${palabraClave}">
+                        <button class="boton-barra-busqueda" type="input">
+                            <img class="imagen-boton-busqueda" th:src="@{/img/search-icon.svg}">
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="movile-caja-cabecera-3">
+                <!-- BOTÓN PARA ABRIR EL MENÚ DE HAMBURGUESA -->
+                <button id="abrir" class="abrir-menu">
+                    <img class="imagen-logo" th:src="@{/img/burger-menu.svg}">
+                    <span>Compra por categorias</span>
+                </button>
+                <!-- FIN DEL BOTÓN -->
+                <div class="caja-cabecera-2-3">
+
+                    <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                        <span class="texto-cabecera-2-3-1">Administradores</span>
+                    </a>
+
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
+                        <span class="texto-cabecera-2-3-2">Entrar</span>
+                    </a>
+
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/heart-icon.svg}">
+                        <span class="texto-cabecera-2-3-3">Favoritos</span>
+                    </a>
+
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/shopping-car-icon.svg}">
+                        <div class="texto-cabecera-2-3-4">0</div>
+                    </a>
+
+
+                </div>
+
+            </div>
+
+            <div class="menu-hamburguesa-caja-categorias" id="movile-menu">
+                <button id="cerrar" class="cerrar-menu">
+                    <span>Cerrar</span>
+                </button>
+
+                <div class="texto-categoria">
+                    <a th:href="@{/productos}">Comprar todo</a>
+                </div>
+                <div class="texto-categoria" th:each="seccion: ${categorias}">
+
+                    <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
+                        <span th:text="${seccion.nombre}"></span>
+                    </a>
+
+                </div>           
+                <div class="texto-categoria">
+                    <a th:href="@{/productos/oferta}">Oferta</a>
+                </div>
+            </div>
+            <script
+                th:src="@{/jquerymenu.js}">
+            </script>
+
+        </div>
+        <!-- CAJA CABECERA PARA EL USUARIO SI ESTA EN UN DISPOSITIVO MOVIL CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO-->
+
+
+
+
+        <!-- 
+        <div class="caja-categorias" th:fragment = "fragmento-categorias">
+            <div class="texto-categoria">
+                <a th:href="@{/productos}">Comprar todo</a>
+            </div>
+            <div class="texto-categoria" th:each="seccion: ${categorias}">
+
                 <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
                     <span th:text="${seccion.nombre}"></span>
                 </a>
-                
+
             </div>           
-            <div>Productos en Oferta</div>
+            <div class="texto-categoria">
+                <a th:href="@{/productos/oferta}">Oferta</a>
+            </div>
         </div>
-        
+        -->
     </body>
 </html>

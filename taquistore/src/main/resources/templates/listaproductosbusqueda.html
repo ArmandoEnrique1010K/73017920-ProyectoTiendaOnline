@@ -6,17 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        
         <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
         <div th:insert="fragments/cabecera-pie :: fragmento-categorias"></div>
 
-        
-        <h1><span th:each="categoriaunica : ${categoriaactual}" th:text="${categoriaunica.nombre}"></span></h1>
-
-        <!-- UBICACIÓN Y NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
-        <form th:each="categoriaunica : ${categoriaactual}" th:action="@{/productos/{nombre}(nombre=${categoriaunica.nombre})}" autocomplete="off" method="GET">
+        <h1>Resultados de busqueda</h1>
+        <!-- -->
+        <!-- Palabra clave: <span th:text="${palabraClave}"></span> -->
+        <form th:action="@{/productos/buscar}" autocomplete="off" method="GET">
             <h2>Filtrar por</h2>
-            <!-- MENU DE FILTROS -->
+            <!-- EL INPUT DE TIPO HIDDEN VA A PERMITIR GUARDAR LA PALABRA CLAVE PARA QUE LUEGO EL USUARIO LO PUEDA FILTRAR SIN PROBLEMAS -->
+            <input type="hidden" name="p-palabraclave" th:value="${palabraClave}">
+            <div th:insert="fragments/filtros-busqueda :: fragmento-categoria"></div>
             <div th:insert="fragments/filtros-busqueda :: fragmento-marca"></div>
             <div th:insert="fragments/filtros-busqueda :: fragmento-precio"></div>
             <div th:insert="fragments/filtros-busqueda :: fragmento-oferta"></div>
@@ -24,6 +24,10 @@
             <input type="submit" value="Filtrar">
         </form>    
         <div>
+            <div>
+                <span th:text="${contarproductos}"></span> elementos encontrados para "<span th:text="${palabraClave}"></span>"
+            </div>
+
             <div th:insert="fragments/cuadros-productos :: fragmento-productos"></div>
         </div>
 

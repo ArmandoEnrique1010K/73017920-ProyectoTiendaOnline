@@ -23,8 +23,7 @@ public class WebController {
 
     @GetMapping("/")
     public String inicio (Model modelo){
-        modelo.addAttribute("categorias", categoriaService.ListarCategorias());
-
+        modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         return "index.html";
     }
 }
