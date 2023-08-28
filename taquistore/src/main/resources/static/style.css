@@ -267,7 +267,7 @@
     }
 
 }
-/* CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 945 pixeles */
+/* CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 1000 pixeles */
 @media (max-width: 1000px){
 
     /* OCULTAR EL DISEÑO PARA COMPUTADORAS Y ACTIVAR EL DISEÑO PARA MOVILES */
@@ -427,4 +427,32 @@
     
     */
 
+}
+
+
+@media (max-width: 740px){
+    .imagen-cabecera-2-3{
+        margin: 0;
+    }
+    
+    .texto-cabecera-2-3-1,
+    .texto-cabecera-2-3-2,
+    .texto-cabecera-2-3-3{
+        display: none;
+    }
+}
+
+
+@media (max-width: 570px){
+    .texto-menu-hamburguesa{
+        display: none;
+    }
+    .imagen-logo{
+        margin: 0 1em;
+        width: 70px; 
+    }
+    
+    .caja-cabecera-2-2{
+        margin: 0 1em;
+    }
 }
