@@ -13,11 +13,14 @@
         <!-- NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO --> 
 
         <div class="caja-cabecera" th:fragment = "fragmento-cabecera">
+            <!-- PRIMERA CABECERA -->
             <div class="caja-cabecera-1">
+                <!-- ENVIO GRATIS... -->
                 <div class="caja-cabecera-1-1">
                     <img class="imagen-cabecera-1-1" th:src="@{/img/box-icon.svg}">
                     <div class="texto-cabecera-1-1">Envío gratis en compras superiores a S/1000</div>
                 </div>
+                <!-- BARRA DE MENÚ -->
                 <div class="caja-cabecera-1-2">
                     <a class="texto-cabecera-1-2" href="#">Acerca de</a>
                     <a class="texto-cabecera-1-2" href="#">Contacto</a>
@@ -26,43 +29,44 @@
                 </div>
             </div>
 
-            <!-- CAJA CABECERA PARA EL USUARIO SI ESTA EN UNA COMPUTADORA CUYA PANTALLA SEA MAYOR QUE 945 PIXELES DE ANCHO-->
+            <!-- SEGUNDA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MAYOR QUE 945 PIXELES DE ANCHO) -->
             <div class="desktop-caja-cabecera-2">
+                <!-- LOGO -->
                 <div class="caja-cabecera-2-1">
                     <a th:href="@{/}">
                         <img class="imagen-logo" th:src="@{/img/logo.png}">
                     </a>
                 </div>
-                <!-- INICIO BARRA DE BUSQUEDA-->
+                <!-- BARRA DE BUSQUEDA-->
                 <div class="caja-cabecera-2-2">
                     <form class="caja-formulario-busqueda"  th:action="@{/productos/buscar}" method="GET">
+                        <!-- BARRA PARA INTRODUCIR TEXTO -->
                         <input class="input-barra-busqueda"
                                type="search" name="p-palabraclave" 
                                placeholder="Buscar productos..." autocomplete="off" 
                                th:value="${palabraClave}">
+                        <!-- BOTÓN PARA INICIAR BUSQUEDA -->
                         <button class="boton-barra-busqueda" type="input">
                             <img class="imagen-boton-busqueda" th:src="@{/img/search-icon.svg}">
                         </button>
                     </form>
                 </div>
-                <!-- FIN BARRA DE BUSQUEDA-->
+                <!-- BARRA DE MENÚ PARA USUARIOS -->
                 <div class="caja-cabecera-2-3">
 
                     <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
+                        <!-- SOLO PARA ADMINISTRADORES-->
                         <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
                         <span class="texto-cabecera-2-3-1">Administradores</span>
                     </a>
-
                     <a class="texto-cabecera-2-3" href="#">
                         <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
                         <span class="texto-cabecera-2-3-2">Entrar</span>
                     </a>
-
                     <a class="texto-cabecera-2-3" href="#">
                         <img class="imagen-cabecera-2-3" th:src="@{/img/heart-icon.svg}">
                         <span class="texto-cabecera-2-3-3">Favoritos</span>
                     </a>
-
                     <a class="texto-cabecera-2-3" href="#">
                         <img class="imagen-cabecera-2-3" th:src="@{/img/shopping-car-icon.svg}">
                         <div class="texto-cabecera-2-3-4">0</div>
@@ -72,100 +76,113 @@
                 </div>
 
             </div>
+
+            <!-- TERCERA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MAYOR QUE 945 PIXELES DE ANCHO) -->
+            <!-- BARRA DE MENÚ PARA MOSTRAR PRODUCTOS POR CATEGORIA -->
             <div class="desktop-caja-categorias">
+                <!-- TODOS LOS PRODUCTOS -->
                 <div class="texto-categoria">
                     <a th:href="@{/productos}">Comprar todo</a>
                 </div>
+                <!-- PRODUCTOS SEGÚN LA CATEGORIA -->
                 <div class="texto-categoria" th:each="seccion: ${categorias}">
-
                     <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
                         <span th:text="${seccion.nombre}"></span>
                     </a>
-
-                </div>           
+                </div>
+                <!-- PRODUCTOS EN OFERTA-->
                 <div class="texto-categoria">
                     <a th:href="@{/productos/oferta}">Oferta</a>
                 </div>
             </div>
 
 
-            <!-- PARA DISPOSITIVOS MOVILES / SOLO APARECE SI EL TAMAÑO DE LA PANTALLA ES MENOR -->
+            <!-- SEGUNDA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO) -->
             <div class="movile-caja-cabecera-2">
 
+                <!-- LOGO -->
                 <div class="caja-cabecera-2-1">
                     <a th:href="@{/}">
                         <img class="imagen-logo" th:src="@{/img/logo.png}">
                     </a>
                 </div>
+
+                <!-- BARRA DE BUSQUEDA-->
                 <div class="caja-cabecera-2-2">
                     <form class="caja-formulario-busqueda"  th:action="@{/productos/buscar}" method="GET">
+                        <!-- BARRA PARA INTRODUCIR TEXTO -->
                         <input class="input-barra-busqueda"
                                type="search" name="p-palabraclave" 
                                placeholder="Buscar productos..." autocomplete="off" 
                                th:value="${palabraClave}">
+                        <!-- BOTÓN PARA INICIAR BUSQUEDA -->
                         <button class="boton-barra-busqueda" type="input">
                             <img class="imagen-boton-busqueda" th:src="@{/img/search-icon.svg}">
                         </button>
                     </form>
+                </div>
+            </div>
+
+            <!-- TERCERA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO) -->
+            <!-- BARRA DE MENÚ PARA MOSTRAR PRODUCTOS POR CATEGORIA -->
+            <div class="movile-caja-cabecera-3">
+
+                <!-- BOTÓN PARA ABRIR EL MENÚ DE HAMBURGUESA -->
+                <div id="abrir" class="abrir-menu">
+                    <img class="imagen-menu-hamburguesa" th:src="@{/img/burger-menu.svg}">
+                    <span class="texto-menu-hamburguesa">Compra por categorias</span>
+                </div>
+
+                <!-- BARRA DE MENÚ PARA USUARIOS -->
+                <div class="caja-cabecera-2-3">
+                    <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
+                        <!-- SOLO PARA ADMINISTRADORES-->
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                        <span class="texto-cabecera-2-3-1">Administradores</span>
+                    </a>
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
+                        <span class="texto-cabecera-2-3-2">Entrar</span>
+                    </a>
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/heart-icon.svg}">
+                        <span class="texto-cabecera-2-3-3">Favoritos</span>
+                    </a>
+                    <a class="texto-cabecera-2-3" href="#">
+                        <img class="imagen-cabecera-2-3" th:src="@{/img/shopping-car-icon.svg}">
+                        <div class="texto-cabecera-2-3-4">0</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- MENÚ DE HAMBURGUESA PARA MOSTRAR PRODUCTOS POR CATEGORIA, SOLAMENTE SE VA A MOSTRAR CUANDO EL USUARIO HAGA CLIC EN EL BOTÓN PARA ABRIR/CERRAR -->
+            <div class="menu-hamburguesa-caja-categorias" id="movile-menu">
+
+                <!-- BOTÓN PARA CERRAR EL MENÚ DE HAMBURGUESA CUANDO ESTE ABIERTO-->
+                <div id="cerrar" class="cerrar-menu">
+                    <span>Cerrar</span>
+                </div>
+                
+                <!-- TODOS LOS PRODUCTOS -->
+                <div class="texto-categoria">
+                    <a th:href="@{/productos}">Comprar todo</a>
+                </div>
+                
+                <!-- PRODUCTOS SEGÚN LA CATEGORIA -->
+                <div class="texto-categoria" th:each="seccion: ${categorias}">
+                    <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
+                        <span th:text="${seccion.nombre}"></span>
+                    </a>
+                </div>
+                
+                <!-- PRODUCTOS EN OFERTA -->
+                <div class="texto-categoria">
+                    <a th:href="@{/productos/oferta}">Oferta</a>
                 </div>
             </div>
             
-            <div class="movile-caja-cabecera-3">
-                <!-- BOTÓN PARA ABRIR EL MENÚ DE HAMBURGUESA -->
-                <button id="abrir" class="abrir-menu">
-                    <img class="imagen-logo" th:src="@{/img/burger-menu.svg}">
-                    <span>Compra por categorias</span>
-                </button>
-                <!-- FIN DEL BOTÓN -->
-                <div class="caja-cabecera-2-3">
-
-                    <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
-                        <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
-                        <span class="texto-cabecera-2-3-1">Administradores</span>
-                    </a>
-
-                    <a class="texto-cabecera-2-3" href="#">
-                        <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
-                        <span class="texto-cabecera-2-3-2">Entrar</span>
-                    </a>
-
-                    <a class="texto-cabecera-2-3" href="#">
-                        <img class="imagen-cabecera-2-3" th:src="@{/img/heart-icon.svg}">
-                        <span class="texto-cabecera-2-3-3">Favoritos</span>
-                    </a>
-
-                    <a class="texto-cabecera-2-3" href="#">
-                        <img class="imagen-cabecera-2-3" th:src="@{/img/shopping-car-icon.svg}">
-                        <div class="texto-cabecera-2-3-4">0</div>
-                    </a>
-
-
-                </div>
-
-            </div>
-
-            <div class="menu-hamburguesa-caja-categorias" id="movile-menu">
-                <button id="cerrar" class="cerrar-menu">
-                    <span>Cerrar</span>
-                </button>
-
-                <div class="texto-categoria">
-                    <a th:href="@{/productos}">Comprar todo</a>
-                </div>
-                <div class="texto-categoria" th:each="seccion: ${categorias}">
-
-                    <a th:href="@{/productos/{nombre}(nombre=${seccion.nombre})}">
-                        <span th:text="${seccion.nombre}"></span>
-                    </a>
-
-                </div>           
-                <div class="texto-categoria">
-                    <a th:href="@{/productos/oferta}">Oferta</a>
-                </div>
-            </div>
-            <script
-                th:src="@{/jquerymenu.js}">
-            </script>
+            <!-- JAVASCRIPT -->
+            <script th:src="@{/jsmenuhamburguesa.js}"></script>
 
         </div>
         <!-- CAJA CABECERA PARA EL USUARIO SI ESTA EN UN DISPOSITIVO MOVIL CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO-->

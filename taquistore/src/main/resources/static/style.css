@@ -47,7 +47,7 @@
     width: 100%;
 }
 
-/* PRIMERA CAJA - CABECERA */
+/* PRIMERA CABECERA */
 .caja-cabecera-1{
     background-color: var(--color-negro);
     color: var(--color-blanco);
@@ -75,14 +75,14 @@
     font-size: var(--tamaño-fuente-1);
 }
 
-/* BARRA DE MENÚ GENERAL */
+/* CAJA CABECERA DE LA DERECHA (BARRA DE MENÚ) */
 .caja-cabecera-1-2{
     display: flex;
     align-items: center;
     margin-right: 2em;
 }
 
-/* CADA BOTÓN, INCLUYENDO EL TEXTO */
+/* CADA UNO DE LOS BOTONES DEL MENÚ, INCLUYENDO EL TEXTO */
 .texto-cabecera-1-2{
     background-color: black;
     text-decoration: none;
@@ -94,15 +94,13 @@
     text-align: center;
 }
 
+/* CUANDO EL CURSOR ESTE SOBRE EL BOTÓN DEL MENÚ */
 .texto-cabecera-1-2:hover{
     border-bottom-color: white;
 }
 
 
-
-
-
-/* SEGUNDA CAJA - CABECERA */
+/* SEGUNDA CABECERA */
 .desktop-caja-cabecera-2{
     display: flex;
     flex-direction: row;
@@ -111,16 +109,14 @@
     background-color: var(--color-blanco)
 }
 
-
-
+/* CAJA CABECERA DE LA IZQUIERDA*/
 .caja-cabecera-2-1{
     display: flex;
     flex-direction: row;
     text-align: center;
-    
-    
 }
 
+/* LOGO */
 .imagen-logo{
     width: 100px;
     padding: 0.5em 0;
@@ -128,7 +124,7 @@
 
 }
 
-
+/* CAJA CABECERA DEL MEDIO*/
 .caja-cabecera-2-2 {
     display: flex;
     align-items: center;
@@ -136,11 +132,13 @@
     margin: 0 2em;
 }
 
+/* CAJA DE LA BARRA DE BUSQUEDA */
 .caja-formulario-busqueda {
     display: flex;
     width: 100%; /* La barra de búsqueda ocupará todo el ancho disponible */
 }
 
+/* CAMPO PARA INTRODUCIR TEXTO PARA BUSCAR */
 .input-barra-busqueda {
     flex-grow: 1; /* Esto permite que el campo de búsqueda se expanda horizontalmente */
     /* Resto de tus estilos... */
@@ -152,68 +150,48 @@
 
 }
 
-/*
-.caja-cabecera-2-2{
-    text-align: left;
-    align-content: center;
-    justify-content: flex-start;
-
-}
-
-.caja-formulario-busqueda{
-    display: flex;
-    text-align: left;
-
-}
-
-.input-barra-busqueda{
-    background-color: var(--color-secundario);
-    border: none;
-    border-radius: 15px 0 0 15px;
-    padding: 1em;
-    width: 100%;
-    max-width: 500px;
-    color: var(--color-negro);
-    margin: auto;
-}
-*/
-
+/* CUANDO EL CURSOR ESTE SOBRE EL CAMPO PARA INTRODUCIR TEXTO PARA BUSCAR */
 .input-barra-busqueda:hover, .input-barra-busqueda:focus{
     background-color: var(--color-blanco);
     border: solid 2px var(--color-terciario);
 }
 
+/* BOTON PARA INICIAR BUSQUEDA */
 .boton-barra-busqueda{
     background-color: var(--color-terciario);
     border: solid 2px var(--color-terciario);
     padding: 0.6em 1.8em;
     border-radius: 0 15px 15px 0;
-        cursor: pointer;
+    cursor: pointer;
 
 }
 
-
+/* ICONO DE LA LUPA */
 .imagen-boton-busqueda{
     width: 24px;
 }
 
+/* CUANDO EL CURSOR ESTE SOBRE EL BOTON PARA INICIAR BUSQUEDA */
 .boton-barra-busqueda:hover{
     background-color: var(--color-negro);
     border: solid 2px var(--color-negro);
 }
 
+/* CAJA CABECERA DE LA DERECHA */
 .caja-cabecera-2-3{
     display: flex;
     flex-direction: row;
-    margin-right: 2em 
+    margin-right: 2em
 
 }
 
+/* CADA UNO DE LOS ICONOS DEL MENÚ */
 .imagen-cabecera-2-3{
     width: 32px;
     margin-right: 0.5em;
 }
 
+/* CADA TEXTO DEL MENÚ */
 .texto-cabecera-2-3 {
     display: flex;
     align-items: center;
@@ -226,6 +204,7 @@
 }
 
 
+/* EL TEXTO DEL ULTIMO BOTÓN DEL MENÚ (NÚMERO 0)*/
 .texto-cabecera-2-3-4{
     display: inline-block;
     width: auto;
@@ -236,51 +215,13 @@
     border-radius: 10px;
 }
 
-
+/* CUANDO EL CURSOR ESTE SOBRE EL TEXTO DEL MENÚ */
 .texto-cabecera-2-3:hover{
     background-color: var(--color-primario)
-        
-}
-
-/*
-
-
-.caja-cabecera-2-1{
-    text-align: center;
-    flex-grow: 2
-}
-
-.imagen-logo{
-    width: 100px
-}
-.caja-cabecera-2-2{
-    flex-grow: 4
-}
-
-
-
-.caja-cabecera-2-3{
-    display: flex;
-    flex-direction: row;
-    flex-grow: 2;
-    align-items: center;
-    margin: 0 2em 0 0;
-    align-self: center;
-    align-items: center;
 
 }
 
-.caja-cabecera-2-3-1{
-}
-
-
-.imagen-cabecera-2-3-1{
-    width: 30px;
-}
-*/
-
-
-
+/* TERCERA CABECERA */
 .desktop-caja-categorias{
     display: flex;
     flex-direction: row;
@@ -290,6 +231,7 @@
     padding: 0 0 0 2em;
 }
 
+/* CADA UNO DE LAS SECCIONES DE LAS CATEGORIAS */
 .texto-categoria a{
     display: block;
     padding: 1em;
@@ -298,91 +240,155 @@
     font-size: var(--tamaño-fuente-1)
 }
 
+/* CUANDO EL CURSOR ESTE SOBRE UNA CATEGORIA */
 .texto-categoria a:hover{
     background-color: var(--color-secundario);
 
     color: var(--color-blanco);
 }
 
-/* ADAPTABLE A MOVILES CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 800 pixeles*/
+/* DISEÑO ADAPTABLE A MOVILES */
+/* CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 850 pixeles */
 @media (max-width: 850px){
-    
+
     .caja-cabecera-1{
         flex-direction: column;
     }
-    
+
     .caja-cabecera-1-1{
         border-bottom: solid 0.1em var(--color-blanco);
     }
-    
+
     .caja-cabecera-1-2{
         align-items: center;
         justify-content: center;
         padding: 0.5em 0;
         margin: 0;
     }
-    
-}
 
-@media (max-width: 945px){
-    
+}
+/* CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 945 pixeles */
+@media (max-width: 1000px){
+
+    /* OCULTAR EL DISEÑO PARA COMPUTADORAS Y ACTIVAR EL DISEÑO PARA MOVILES */
     .desktop-caja-cabecera-2{
         display: none;
     }
-    
+
     .desktop-caja-categorias{
         display: none;
     }
-    
+
     .movile-caja-cabecera-2{
         display: flex;
     }
-    
+
     .movile-caja-cabecera-3{
         display: flex;
         flex-direction: row;
-        justify-content: space-between
+        justify-content: space-between;
+        background-color: var(--color-primario);
     }
-    
+
+
+    /* MENU DE HAMBURGUESA */
+    .abrir-menu{
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+        align-items: center;
+        margin-left: 2em;
+    }
+    .abrir-menu:hover, .texto-cabecera-2-3:hover{
+        background-color: var(--color-secundario);
+        color: var(--color-blanco);
+        border-radius: 0;
+
+    }
+
+    .imagen-menu-hamburguesa{
+        margin-left: 0.8em;
+        margin-right: 0.5em;
+        width: 48px;
+    }
+
+    .texto-menu-hamburguesa{
+        margin-right: 0.8em;
+        font-size: var(--tamaño-fuente-2);
+    }
     .menu-hamburguesa-caja-categorias{
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-    
-    .abrir-menu{
-        border: 0;
-        display: flex;
-        flex-direction: row;
-        cursor: pointer;
-        align-items: center;
-    }
-    
+
+
     .menu-hamburguesa-caja-categorias {
         opacity: 0;
         visibility: hidden;
         display: flex;
         flex-direction: column;
-        align-items: end;
+        align-items: center;
         gap: 1rem;
         position: absolute;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
-        background-color: #1c1c1c;
+        background-color: var(--color-primario);
         padding: 2rem;
         box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .5);
+        color: var(--color-blanco);
+
     }
 
     .menu-hamburguesa-caja-categorias.visible {
         opacity: 1;
         visibility: visible;
+        overflow-y:scroll;
     }
+
+    /* BLOQUEA EL SCROLL DE TODO EL DOCUMENTO HTML*/
+    .scroll-bloqueado {
+        overflow: hidden;
+    }
+
+
     
-    
-    
-    
+
+    /* Estilos para las categorías */
+    .texto-categoria  a{
+        color: var(--color-blanco);
+        font-size: var(--tamaño-fuente-2);
+
+
+    }
+    .texto-categoria, .cerrar-menu{
+        display: block;
+        width: 100%; /* Ocupa todo el ancho disponible */
+        color: var(--color-blanco);
+        text-decoration: none;
+        font-size: var(--tamaño-fuente-2);
+        box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+        text-align: center; /* Centra el texto horizontalmente */
+        background-color: var(--color-secundario);
+
+    }
+
+    .texto-categoria a:hover,
+    .cerrar-menu:hover{
+        background-color: var(--color-terciario);
+    }
+
+
+    .cerrar-menu{
+        padding: 1em;
+        background-color: var(--color-secundario);
+        cursor: pointer;
+    }
+
+
+
     /*
     .movile-caja-cabecera-2{
         display: flex;
@@ -419,6 +425,6 @@
         width: 75px;
     }
     
- */
- 
+    */
+
 }

@@ -4,11 +4,12 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link th:href="@{/style.css}" rel="stylesheet">
+
     </head>
     <body>
         
         <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
-        <div th:insert="fragments/cabecera-pie :: fragmento-categorias"></div>
 
         
         <h1><span th:each="categoriaunica : ${categoriaactual}" th:text="${categoriaunica.nombre}"></span></h1>
