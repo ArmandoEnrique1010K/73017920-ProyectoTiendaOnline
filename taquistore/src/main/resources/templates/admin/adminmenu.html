@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
     <head>
-        <title>Inicio | Taqui Store</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link th:href="@{/style.css}" rel="stylesheet">
+
     </head>
     <body>
-        <!-- INSERTAR LA PLANTILLA DE LA BARRA DE MENÚ -->
         <div class="caja-cabecera">
             <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
             <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
@@ -16,8 +16,8 @@
             <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
             <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
         </div>
-        <h1>
-            (((Súper precios en tus artículos favoritos)))
-        </h1>
+        <h1>MODO ADMINISTRADOR</h1>
+        <div><a th:href="@{/admin/productos}">Productos</a></div>
+        
     </body>
 </html>

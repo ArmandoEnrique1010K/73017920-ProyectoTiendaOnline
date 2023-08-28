@@ -8,7 +8,14 @@
 
     </head>
     <body>
-        <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
         <h1>Oferta</h1>
         <form th:action="@{/productos/oferta}" autocomplete="off" method="GET">
             <h2>Filtrar por</h2>

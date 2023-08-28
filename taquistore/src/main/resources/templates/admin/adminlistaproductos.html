@@ -4,15 +4,21 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+
     </head>
     <body>
-        <h1>Administrador - Lista de Productos</h1>
-
-        <!-- UBICACIÓN Y NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
-        <h2>Barra de menu</h2>
         <!-- INSERTAR LA PLANTILLA DE LA BARRA DE MENÚ -->
-        <div th:insert="fragments/cabecera-pie :: fragmento-cabecera"></div>
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
 
+        <h1>Modo administrador - Productos</h1>
         <h3>Filtros</h3>
         <form th:action="@{/admin/productos}" method="GET">
             <!-- MENU DE FILTROS -->
@@ -24,8 +30,12 @@
             <div th:insert="fragments/filtros-busqueda :: fragmento-oferta"></div>
 
             <input type="submit" value="Filtrar">
-        </form>        
+        </form>
+
+
         <h3>Lista de productos</h3>
+        <div>En esta tabla se muestran todos los productos habilitados y deshabilitados. Los productos deshabilitados no se van a mostrar para los usuarios que no sean administradores</div>
+        <!--
         <table border="1">
             <thead>
                 <tr>
@@ -49,7 +59,6 @@
                     <td th:text="${registro.precionormal}"></td>
                     <td th:text="${registro.preciooferta}"></td>
                     <td th:text="${registro.estado}"></td>
-                    <!-- OBTENER LOS VALORES "NOMBRE" Y "ESTADO" DE CADA UNA DE LAS TABLAS A LA QUE ESTA RELACIONADA PRODUCTOS -->
                     <td th:text="${registro.categoriaEntity.nombre}"></td>
                     <td th:text="${registro.categoriaEntity.estado}"></td>
                     <td th:text="${registro.marcaEntity.nombre}"></td>
@@ -57,6 +66,8 @@
                 </tr>
             </tbody>
         </table>
+        -->
+        <div th:insert="fragments/cuadros-productos :: fragmento-productos"></div>
 
     </body>
 </html>

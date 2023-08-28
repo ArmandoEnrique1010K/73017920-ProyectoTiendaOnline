@@ -24,6 +24,16 @@ public class AdminController {
     @Autowired
     private MarcaService marcaService;
     
+    @GetMapping
+    public String menudeadministradores(
+            Model modelo
+
+    ){
+        modelo.addAttribute("categorias", categoriaService.ListarCategorias());
+        return "admin/adminmenu";
+        
+    }
+    
     @GetMapping("/productos")
     public String administradordetodoslosproductos(
             @RequestParam(value = "p-categoria", required = false) Long categoriaId,
@@ -40,5 +50,9 @@ public class AdminController {
         return "admin/adminlistaproductos";
     }
 
+    
 
+    
+    
+    
 }

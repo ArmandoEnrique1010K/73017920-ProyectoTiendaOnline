@@ -12,9 +12,9 @@
         <!-- CREACIÓN DE LA PLANTILLA DE LA BARRA DE MENÚ -->
         <!-- NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO --> 
 
-        <div class="caja-cabecera" th:fragment = "fragmento-cabecera">
+        <div class="caja-cabecera">
             <!-- PRIMERA CABECERA -->
-            <div class="caja-cabecera-1">
+            <div class="caja-cabecera-1" th:fragment = "fragmento-cabecera-1">
                 <!-- ENVIO GRATIS... -->
                 <div class="caja-cabecera-1-1">
                     <img class="imagen-cabecera-1-1" th:src="@{/img/box-icon.svg}">
@@ -30,7 +30,7 @@
             </div>
 
             <!-- SEGUNDA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MAYOR QUE 945 PIXELES DE ANCHO) -->
-            <div class="desktop-caja-cabecera-2">
+            <div class="desktop-caja-cabecera-2" th:fragment = "fragmento-cabecera-2-desktop">
                 <!-- LOGO -->
                 <div class="caja-cabecera-2-1">
                     <a th:href="@{/}">
@@ -54,11 +54,22 @@
                 <!-- BARRA DE MENÚ PARA USUARIOS -->
                 <div class="caja-cabecera-2-3">
 
-                    <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
-                        <!-- SOLO PARA ADMINISTRADORES-->
-                        <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
-                        <span class="texto-cabecera-2-3-1">Administradores</span>
-                    </a>
+                    <!-- CONDICIONAL SEGUN SI LA URL COMIENZA CON... -->
+                    <div th:if="${#httpServletRequest.requestURI.startsWith('/admin')}">
+                        <a class="texto-cabecera-2-3" th:href="@{/}">
+                            <!-- SOLO PARA ADMINISTRADORES-->
+                            <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                            <span class="texto-cabecera-2-3-1">Usuarios</span>
+                        </a>
+                    </div>
+                    <div th:unless="${#httpServletRequest.requestURI.startsWith('/admin')}">
+                        <a class="texto-cabecera-2-3" th:href="@{/admin}">
+                            <!-- SOLO PARA ADMINISTRADORES-->
+                            <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                            <span class="texto-cabecera-2-3-1">Administradores</span>
+                        </a>
+                    </div>
+
                     <a class="texto-cabecera-2-3" href="#">
                         <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
                         <span class="texto-cabecera-2-3-2">Entrar</span>
@@ -79,7 +90,7 @@
 
             <!-- TERCERA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MAYOR QUE 945 PIXELES DE ANCHO) -->
             <!-- BARRA DE MENÚ PARA MOSTRAR PRODUCTOS POR CATEGORIA -->
-            <div class="desktop-caja-categorias">
+            <div class="desktop-caja-categorias" th:fragment = "fragmento-categorias-desktop">
                 <!-- TODOS LOS PRODUCTOS -->
                 <div class="texto-categoria">
                     <a th:href="@{/productos}">Comprar todo</a>
@@ -98,7 +109,7 @@
 
 
             <!-- SEGUNDA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO) -->
-            <div class="movile-caja-cabecera-2">
+            <div class="movile-caja-cabecera-2" th:fragment = "fragmento-cabecera-2-mobile">
 
                 <!-- LOGO -->
                 <div class="caja-cabecera-2-1">
@@ -125,7 +136,7 @@
 
             <!-- TERCERA CABECERA (CUANDO EL USUARIO ESTE EN UNA COMPUTADORA CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO) -->
             <!-- BARRA DE MENÚ PARA MOSTRAR PRODUCTOS POR CATEGORIA -->
-            <div class="movile-caja-cabecera-3">
+            <div class="movile-caja-cabecera-3" th:fragment = "fragmento-cabecera-3-mobile">
 
                 <!-- BOTÓN PARA ABRIR EL MENÚ DE HAMBURGUESA -->
                 <div id="abrir" class="abrir-menu">
@@ -135,11 +146,24 @@
 
                 <!-- BARRA DE MENÚ PARA USUARIOS -->
                 <div class="caja-cabecera-2-3">
-                    <a class="texto-cabecera-2-3" th:href="@{/admin/productos}">
-                        <!-- SOLO PARA ADMINISTRADORES-->
-                        <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
-                        <span class="texto-cabecera-2-3-1">Administradores</span>
-                    </a>
+                    
+                    <!-- CONDICIONAL SEGUN SI LA URL COMIENZA CON... -->
+                    <div th:if="${#httpServletRequest.requestURI.startsWith('/admin')}">
+                        <a class="texto-cabecera-2-3" th:href="@{/}">
+                            <!-- SOLO PARA ADMINISTRADORES-->
+                            <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                            <span class="texto-cabecera-2-3-1">Usuarios</span>
+                        </a>
+                    </div>
+                    <div th:unless="${#httpServletRequest.requestURI.startsWith('/admin')}">
+                        <a class="texto-cabecera-2-3" th:href="@{/admin}">
+                            <!-- SOLO PARA ADMINISTRADORES-->
+                            <img class="imagen-cabecera-2-3" th:src="@{/img/key-icon.svg}">
+                            <span class="texto-cabecera-2-3-1">Administradores</span>
+                        </a>
+                    </div>
+                    
+                    
                     <a class="texto-cabecera-2-3" href="#">
                         <img class="imagen-cabecera-2-3" th:src="@{/img/user-icon.svg}">
                         <span class="texto-cabecera-2-3-2">Entrar</span>
@@ -156,7 +180,7 @@
             </div>
 
             <!-- MENÚ DE HAMBURGUESA PARA MOSTRAR PRODUCTOS POR CATEGORIA, SOLAMENTE SE VA A MOSTRAR CUANDO EL USUARIO HAGA CLIC EN EL BOTÓN PARA ABRIR/CERRAR -->
-            <div class="menu-hamburguesa-caja-categorias" id="movile-menu">
+            <div class="menu-hamburguesa-caja-categorias" id="movile-menu" th:fragment = "fragmento-menu-hamburguesa-mobile">
 
                 <!-- BOTÓN PARA CERRAR EL MENÚ DE HAMBURGUESA CUANDO ESTE ABIERTO-->
                 <div id="cerrar" class="cerrar-menu">
@@ -179,10 +203,13 @@
                 <div class="texto-categoria">
                     <a th:href="@{/productos/oferta}">Oferta</a>
                 </div>
+                
+                            <!-- JAVASCRIPT -->
+            <script th:src="@{/jsmenuhamburguesa.js}"></script>
+
+                
             </div>
             
-            <!-- JAVASCRIPT -->
-            <script th:src="@{/jsmenuhamburguesa.js}"></script>
 
         </div>
         <!-- CAJA CABECERA PARA EL USUARIO SI ESTA EN UN DISPOSITIVO MOVIL CUYA PANTALLA SEA MENOR QUE 945 PIXELES DE ANCHO-->

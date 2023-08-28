@@ -2,8 +2,8 @@ const nav = document.querySelector("#movile-menu");
 const abrir = document.querySelector("#abrir");
 const cerrar = document.querySelector("#cerrar");
 
-const toggleMenuElement = document.getElementById('abrir');
-const toggleMenuElement2 = document.getElementById('cerrar');
+const toggleMenuElementAbrir = document.getElementById('abrir');
+const toggleMenuElementCerrar = document.getElementById('cerrar');
 
 
 const menuHamburguesa = document.querySelector('.menu-hamburguesa-caja-categorias');
@@ -19,7 +19,7 @@ cerrar.addEventListener("click", () => {
 });
 
 // Agregar evento click al div
-toggleMenuElement.addEventListener('click', () => {
+toggleMenuElementAbrir.addEventListener('click', () => {
 // Cambiar la visibilidad del menú
 
 // Bloquear o permitir el scroll del documento según la visibilidad del menú
@@ -30,7 +30,7 @@ toggleMenuElement.addEventListener('click', () => {
 });
 
 
-toggleMenuElement2.addEventListener('click', () => {
+toggleMenuElementCerrar.addEventListener('click', () => {
 // Cambiar la visibilidad del menú
 
     if (!menuHamburguesa.classList.contains('visible')) {
