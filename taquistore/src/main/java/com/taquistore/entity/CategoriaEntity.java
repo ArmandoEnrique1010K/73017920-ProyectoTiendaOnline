@@ -28,9 +28,9 @@ public class CategoriaEntity {
     @Column(name = "id_categoria")
     private Long id_categoria;
     // No se van a permitir nombres repetitivos
-    @Column(name = "nombre", unique = true)
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
-    @Column(name = "estado")
+    @Column(name = "estado", nullable = false)
     private Boolean estado;
     
     // Relacion hacia productos

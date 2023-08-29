@@ -18,7 +18,10 @@ public interface MarcaRepository extends JpaRepository<MarcaEntity, Long>{
     @Query("SELECT DISTINCT m FROM MarcaEntity m JOIN m.productoEntity p JOIN p.categoriaEntity c WHERE c.nombre = :nombreCategoria AND m.estado = true")
     List<MarcaEntity> findAllDistinctByCategoriaGroupAndEstadoTrue(@Param("nombreCategoria") String nombreCategoria);
 
-    
+    // LISTAR LAS DISTINTAS MARCAS QUE SE ENCUENTRAN DENTRO DE UN GRUPO DE PRODUCTOS QUE PERTENECEN A LA MISMA CATEGORIA
+    @Query("SELECT DISTINCT m FROM MarcaEntity m JOIN m.productoEntity p JOIN p.categoriaEntity c WHERE c.nombre = :nombreCategoria")
+    List<MarcaEntity> findAllDistinctByCategoriaGroup(@Param("nombreCategoria") String nombreCategoria);
+
     
     /*
     // LISTAR LAS DISTINTAS MARCAS QUE SE ENCUENTREN DENTRO DEL GRUPO DE PRODUCTOS QUE PERTENECEN A LA MISMA CATEGORIA

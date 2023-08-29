@@ -42,4 +42,9 @@ public class MarcaServiceImpl implements MarcaService{
     public List<MarcaEntity> ListarDistintasMarcasByGrupoCategoriaAndEstadoTrue(String nombreCategoria) {
         return marcaRepository.findAllDistinctByCategoriaGroupAndEstadoTrue(nombreCategoria);
     }
+
+    @Override
+    public List<MarcaEntity> ListarDistintasMarcasByGrupoCategoria(String nombreCategoria) {
+        return marcaRepository.findAllDistinctByCategoriaGroup(nombreCategoria);
+    }
 }

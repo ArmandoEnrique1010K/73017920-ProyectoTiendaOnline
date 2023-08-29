@@ -10,15 +10,18 @@
     <body>
         <!-- INSERTAR LA PLANTILLA DE LA BARRA DE MENÚ -->
         <div class="caja-cabecera">
-            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
-            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
-            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
-            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
-            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
-            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+            <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
         </div>
 
         <h1>Modo administrador - Productos</h1>
+        <div>
+            <a th:href="@{/admin/productos/nuevo}">Agregar producto</a>
+        </div>
         <h3>Filtros</h3>
         <form th:action="@{/admin/productos}" method="GET">
             <!-- MENU DE FILTROS -->

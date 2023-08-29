@@ -9,6 +9,7 @@ public interface MarcaService {
     public List<MarcaEntity> ListarMarcas();
     public List<MarcaEntity> ListarMarcasByEstadoTrue();
     public List<MarcaEntity> ListarDistintasMarcasByGrupoCategoriaAndEstadoTrue(String nombreCategoria);
+    public List<MarcaEntity> ListarDistintasMarcasByGrupoCategoria(String nombreCategoria);
 
     /*
     public List<MarcaEntity> ListarMarcasPresentesPorOferta();

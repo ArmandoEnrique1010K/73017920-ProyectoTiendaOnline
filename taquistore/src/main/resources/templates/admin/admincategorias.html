@@ -4,7 +4,7 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link th:href="@{/style.css}" rel="stylesheet">
+                <link th:href="@{/style.css}" rel="stylesheet">
 
     </head>
     <body>
@@ -16,11 +16,24 @@
             <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-cabecera-3-mobile"></div>
             <div th:insert="admin/fragments/admin-cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
         </div>
-        <h1>MODO ADMINISTRADOR</h1>
-        <div><a th:href="@{/admin/productos}">Productos</a></div>
-        <div><a th:href="@{/admin/productos/nuevo}">Agregar producto</a>
-        <div><a th:href="@{/admin/categorias}">Categorias</a></div>
-        <div><a th:href="@{/admin/productos}">Marcas</a></div>
-
+        <div>
+            <h1>Modo Administrador - Categorias</h1>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="categoria : ${categorias}">
+                        <td th:text="${categoria.id_categoria}">
+                        <td th:text="${categoria.nombre}"></td>
+                        <td th:text="${categoria.estado}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

@@ -237,6 +237,27 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long>{
             @Param("palabraClave") String palabraClave
     );
 
-    
+    @Query(value = "SELECT COUNT(p) FROM ProductoEntity p JOIN p.categoriaEntity c JOIN p.marcaEntity m "
+            + "WHERE (:categoriaId IS NULL OR c.id_categoria = :categoriaId) "
+            + "AND (COALESCE(:marcaIds, NULL) IS NULL OR m.id_marca IN :marcaIds) "
+            + "AND ((:minPrecio IS NULL AND :maxPrecio IS NULL) OR "
+            + "     (p.oferta = true AND (:minPrecio IS NULL OR p.preciooferta >= :minPrecio) "
+            + "             AND (:maxPrecio IS NULL OR p.preciooferta <= :maxPrecio)) OR "
+            + "     (p.oferta = false AND (:minPrecio IS NULL OR p.precionormal >= :minPrecio) "
+            + "             AND (:maxPrecio IS NULL OR p.precionormal <= :maxPrecio))) "
+            + "AND (:enOferta IS NULL OR p.oferta = :enOferta) "
+            + "AND (:palabraClave IS NULL OR CONCAT(' ', p.id_producto, p.nombre, p.precionormal, p.preciooferta, "
+            + "     m.nombre, c.nombre) LIKE %:palabraClave%) "
+            + "ORDER BY p.id_producto DESC"
+    )
+    Long countAllByParams(
+            @Param("categoriaId") Long categoriaId, 
+            @Param("marcaIds") List<Long> marcaIds,
+            @Param("minPrecio") Double minPrecio,
+            @Param("maxPrecio") Double maxPrecio,
+            @Param("enOferta") Boolean enOferta,
+            @Param("palabraClave") String palabraClave
+    );
+
     
 }
