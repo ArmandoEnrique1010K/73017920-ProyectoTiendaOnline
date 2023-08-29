@@ -1,7 +1,7 @@
 # 73017920-ProyectoTiendaOnline
 Proyecto Definitivo
 
-- ENRIQUE: Todavia falta "paginar" los productos y falta añadir estilos a los productos
+- ENRIQUE: Estoy aqui...
 - Termine con el diseño adaptable para moviles en la cabecera de la aplicación web.
 - Los filtros de busqueda funcionan correctamente.
 - Pulsa el icono de la llave para ir al "modo administrador"
