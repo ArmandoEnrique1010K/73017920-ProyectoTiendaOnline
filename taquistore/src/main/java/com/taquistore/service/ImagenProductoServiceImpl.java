@@ -42,8 +42,6 @@ public class ImagenProductoServiceImpl implements ImagenProductoService{
     @Value("${storage.location.productos}")
     private String storageLocationProductos;
 
-    @Autowired
-    private ImagenProductoRepository imagenProductoRepository;
     
     
     @PostConstruct

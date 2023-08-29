@@ -1,11 +1,13 @@
 package com.taquistore.repository;
 
 import com.taquistore.entity.ProductoEntity;
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<ProductoEntity, Long>{
@@ -170,6 +172,43 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long>{
             @Param("palabraClave") String palabraClave
     );
 
+    
+    
+    
+    @Query(value = "SELECT p FROM ProductoEntity p JOIN p.categoriaEntity c JOIN p.marcaEntity m "
+            + "WHERE (:categoriaId IS NULL OR c.id_categoria = :categoriaId) "
+            + "AND (COALESCE(:marcaIds, NULL) IS NULL OR m.id_marca IN :marcaIds) "
+            + "AND ((:minPrecio IS NULL AND :maxPrecio IS NULL) OR "
+            + "     (p.oferta = true AND (:minPrecio IS NULL OR p.preciooferta >= :minPrecio) "
+            + "             AND (:maxPrecio IS NULL OR p.preciooferta <= :maxPrecio)) OR "
+            + "     (p.oferta = false AND (:minPrecio IS NULL OR p.precionormal >= :minPrecio) "
+            + "             AND (:maxPrecio IS NULL OR p.precionormal <= :maxPrecio))) "
+            + "AND (:enOferta IS NULL OR p.oferta = :enOferta) "
+            + "AND (:palabraClave IS NULL OR CONCAT(' ', p.nombre, m.nombre, c.nombre) LIKE %:palabraClave%) "
+            + "AND p.estado = true "
+            + "AND c.estado = true "
+            + "AND m.estado = true "
+            + "ORDER BY p.id_producto DESC"
+    )
+    Page<ProductoEntity> findAllPagesByEstadoTrueAndParams(
+            @Param("categoriaId") Long categoriaId, 
+            @Param("marcaIds") List<Long> marcaIds,
+            @Param("minPrecio") Double minPrecio,
+            @Param("maxPrecio") Double maxPrecio,
+            @Param("enOferta") Boolean enOferta,
+            @Param("palabraClave") String palabraClave,
+            Pageable pageable
+    );
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /* CANTIDAD NUMERICA */
     @Query("SELECT COUNT(p) FROM ProductoEntity p JOIN p.categoriaEntity c JOIN p.marcaEntity m "
             + "WHERE (:categoriaId IS NULL OR c.id_categoria = :categoriaId) "
@@ -224,8 +263,7 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long>{
             + "     (p.oferta = false AND (:minPrecio IS NULL OR p.precionormal >= :minPrecio) "
             + "             AND (:maxPrecio IS NULL OR p.precionormal <= :maxPrecio))) "
             + "AND (:enOferta IS NULL OR p.oferta = :enOferta) "
-            + "AND (:palabraClave IS NULL OR CONCAT(' ', p.id_producto, p.nombre, p.precionormal, p.preciooferta, "
-            + "     m.nombre, c.nombre) LIKE %:palabraClave%) "
+            + "AND (:palabraClave IS NULL OR CONCAT(' ', p.id_producto, p.nombre, m.nombre, c.nombre) LIKE %:palabraClave%) "
             + "ORDER BY p.id_producto DESC"
     )
     List<ProductoEntity> findAllByParams(
@@ -246,8 +284,7 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long>{
             + "     (p.oferta = false AND (:minPrecio IS NULL OR p.precionormal >= :minPrecio) "
             + "             AND (:maxPrecio IS NULL OR p.precionormal <= :maxPrecio))) "
             + "AND (:enOferta IS NULL OR p.oferta = :enOferta) "
-            + "AND (:palabraClave IS NULL OR CONCAT(' ', p.id_producto, p.nombre, p.precionormal, p.preciooferta, "
-            + "     m.nombre, c.nombre) LIKE %:palabraClave%) "
+            + "AND (:palabraClave IS NULL OR CONCAT(' ', p.id_producto, p.nombre, m.nombre, c.nombre) LIKE %:palabraClave%) "
             + "ORDER BY p.id_producto DESC"
     )
     Long countAllByParams(

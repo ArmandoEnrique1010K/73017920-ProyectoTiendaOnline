@@ -3,6 +3,8 @@ package com.taquistore.service;
 import com.taquistore.entity.ImagenProductoEntity;
 import com.taquistore.entity.ProductoEntity;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 public interface ProductoService {
@@ -14,6 +16,16 @@ public interface ProductoService {
             Double maxPrecio,
             Boolean enOferta,
             String palabraClave
+    );
+    
+    public Page<ProductoEntity> ListarPorPaginasProductosHabilitadosPorFiltrosDeBusqueda(
+            Long categoriaId,
+            List<Long> marcaIds,
+            Double minPrecio,
+            Double maxPrecio,
+            Boolean enOferta,
+            String palabraClave,
+            Pageable pageable
     );
     
     public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(

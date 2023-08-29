@@ -247,6 +247,26 @@
     color: var(--color-blanco);
 }
 
+
+/* TITULO PRINCIPAL DE LA SESIÓN DE PRODUCTOS */
+.titulo-principal{
+    text-align: center;
+    padding: 1.5em 0;
+    font-size: 36px;
+}
+
+.caja-grupo-filtros-productos{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+
+
+
+
 /* DISEÑO ADAPTABLE A MOVILES */
 /* CUANDO EL ANCHO DE LA PANTALLA SEA MENOR A 850 pixeles */
 @media (max-width: 850px){

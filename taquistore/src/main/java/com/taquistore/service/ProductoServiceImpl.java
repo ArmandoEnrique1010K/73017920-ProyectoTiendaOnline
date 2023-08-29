@@ -6,6 +6,9 @@ import com.taquistore.repository.ImagenProductoRepository;
 import com.taquistore.repository.ProductoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -76,6 +79,16 @@ public class ProductoServiceImpl implements ProductoService{
     @Override
     public void EliminarProducto(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Page<ProductoEntity> ListarPorPaginasProductosHabilitadosPorFiltrosDeBusqueda(
+            Long categoriaId, List<Long> marcaIds, Double minPrecio, Double maxPrecio, 
+            Boolean enOferta, String palabraClave, Pageable pageable) {
+        
+        
+        
+        return productoRepository.findAllPagesByEstadoTrueAndParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave, pageable);
     }
     
     
