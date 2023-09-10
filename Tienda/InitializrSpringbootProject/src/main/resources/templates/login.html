@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+    </head>
+    <body>
+        <!-- INSERTAR LA PLANTILLA DE LA BARRA DE MENÚ -->
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
+
+        <h1>LOGIN</h1>
+        <form th:action="@{/login}" method="POST">
+            <div>
+                <label>Nombre de usuario: </label>
+                <input type="text" name="username" placeholder="digite su email ID">
+            </div>
+            <div>
+                <label>Contraseña: </label>
+                <input type="password" name="password" placeholder="digite su contraseña">
+            </div> 
+            <div>
+                <button type="submit">Iniciar sesión</button>
+            </div>
+            <div>
+                Si no tienes una cuenta, <a th:href="@{/registro}"> registrate aqui</a>
+            </div>
+        </form>
+    </body>
+</html>

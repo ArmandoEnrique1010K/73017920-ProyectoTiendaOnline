@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Filtros de busqueda</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <div th:fragment = "fragmento-categoria">
+            <div class="caja-categorias">
+                <h3 class="titulo-h3">Categoria</h3>
+
+                <div class="filtro-texto-categoria">
+                    <input id="rbtodos" type="radio" name="p-categoria" th:value="null" onchange="filtrarProductos()">
+                    <label for="rbtodos">Todos</label>
+                </div>
+
+                <th:block th:each="categoria : ${categorias}">  
+                    <div class="filtro-texto-categoria">
+                        <input th:id="'cat' + ${categoria.id_categoria}" type="radio" name="p-categoria" th:value="${categoria.id_categoria}" onchange="filtrarProductos()">
+                        <label th:for="'cat' + ${categoria.id_categoria}" th:text="${categoria.nombre}"></label>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+
+
+        <div th:fragment = "fragmento-marca">
+            <div class="caja-marcas">
+                <h3 class="titulo-h3">Marca</h3>
+                <th:block th:each="marca : ${marcas}">
+                    <div class="filtro-texto-marca">
+                        <input th:id="'mar' + ${marca.id_marca}" type="checkbox" name="p-marcas" th:value="${marca.id_marca}" onchange="filtrarProductos()">
+                        <label th:for="'mar' + ${marca.id_marca}" th:text="${marca.nombre}"></label>
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+
+
+        <div th:fragment = "fragmento-precio">
+            <div class="caja-precios">
+                <h3 class="titulo-h3">Precio</h3>
+                <div class="filtro-texto-precio">
+                    <label for='precioMin'>Minimo: </label>
+                    <input id="precioMin" type="number" name="p-min">
+                </div>
+                <div class="filtro-texto-precio">
+                    <label for='precioMax'>Maximo: </label>
+                    <input id="precioMax" type="number" name="p-max">
+                </div>
+            </div>
+        </div>
+
+        <div th:fragment = "fragmento-oferta">
+            <div class="caja-oferta">
+                <h3 class="titulo-h3">Oferta</h3>
+                <div class="filtro-texto-oferta">
+                    <label>
+                        <input type="checkbox" name="p-oferta" th:value="true" onchange="filtrarProductos()">
+                        <span>Oferta</span>
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>

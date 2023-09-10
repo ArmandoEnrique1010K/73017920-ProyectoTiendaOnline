@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Oferta | Taqui Store</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
+        <h1 class="titulo-principal">Oferta</h1>
+        <div class="caja-grupo-filtros-y-productos">
+
+        <form class="formulario-filtros" th:action="@{/productos/oferta}" autocomplete="off" method="GET">
+            <h2 class="titulo-h2">Filtrar por</h2>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-categoria"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-marca"></div>
+            <div th:insert="fragments/filtros-busqueda :: fragmento-precio"></div>
+            <div class="boton-filtrar-precio">
+                    <input type="submit" value="Filtrar por precios" onclick="filtrarProductos()">  
+            </div>
+
+        </form>
+
+        <div>
+            <div th:insert="fragments/cuadros-productos :: fragmento-productos"></div>
+        </div>
+        </div>
+        <script>
+            function filtrarProductos() {
+                // Obtener todas las casillas de verificación marcadas
+                const checkboxes = document.querySelectorAll('input[name="p-marcas"]:checked');
+
+                // Obtener los valores seleccionados y crear una lista separada por comas
+                const valoresMarcas = Array.from(checkboxes).map(checkbox => checkbox.value).join(',');
+
+                // Obtener el valor seleccionado para la categoría
+                const categoriaSeleccionada = document.querySelector('input[name="p-categoria"]:checked');
+
+                // Obtener los valores de precio mínimo y máximo
+                const minPrecio = document.querySelector('input[name="p-min"]').value;
+                const maxPrecio = document.querySelector('input[name="p-max"]').value;
+
+
+
+                // Construir la URL con los valores seleccionados
+                let url = '/productos/oferta?';
+
+                if (valoresMarcas) {
+                    url += `p-marcas=${valoresMarcas}&`;
+                }
+
+                if (categoriaSeleccionada) {
+                    url += `p-categoria=${categoriaSeleccionada.value}&`;
+                }
+
+                if (minPrecio) {
+                    url += `p-min=${minPrecio}&`;
+                }
+
+                if (maxPrecio) {
+                    url += `p-max=${maxPrecio}&`;
+                }
+
+
+
+                // Eliminar el último carácter '&' si está presente
+                if (url.endsWith('&')) {
+                    url = url.slice(0, -1);
+                }
+
+                // Prevenir el envío predeterminado del formulario
+                event.preventDefault();
+
+                // Redirigir al usuario a la URL filtrada
+                window.location.href = url;
+            }
+
+
+
+
+
+
+            let categoriaSeleccionada = false;
+
+// Función para marcar el radio button de la categoría basado en los parámetros de la URL y filtrar productos
+            function marcarCategoriaDesdeURL() {
+                const parametrosURL = new URLSearchParams(window.location.search);
+                const categoriaSeleccionada = parametrosURL.get('p-categoria');
+
+                // Verificar si alguna otra categoría está marcada al cargar la página
+                const otrosRadios = document.querySelectorAll('input[name="p-categoria"]:not([value="null"])');
+                const rbtodos = document.getElementById('rbtodos');
+
+                otrosRadios.forEach(radio => {
+                    if (radio.checked) {
+                        categoriaSeleccionada = true;
+                    }
+                });
+
+                // Marcar "Todos" si no se selecciona ninguna otra categoría
+                if (!categoriaSeleccionada) {
+                    rbtodos.checked = true;
+                }
+
+                // Filtrar productos al cargar la página
+
+                if (categoriaSeleccionada) {
+                    const radioButtonsCategoria = document.querySelectorAll('input[name="p-categoria"]');
+                    radioButtonsCategoria.forEach(radio => {
+                        if (radio.value === categoriaSeleccionada) {
+                            radio.checked = true;
+                        }
+                    });
+                }
+            }
+
+// Llamar a la función cuando la página se cargue
+            window.addEventListener('load', marcarCategoriaDesdeURL);
+
+            // Función para marcar los checkboxes basados en los parámetros de la URL
+            function marcarCheckboxesDesdeURL() {
+                const parametrosURL = new URLSearchParams(window.location.search);
+                const marcasSeleccionadas = parametrosURL.get('p-marcas');
+
+                if (marcasSeleccionadas) {
+                    const marcaNombres = marcasSeleccionadas.split(',');
+
+                    marcaNombres.forEach(marcaNombre => {
+                        const checkbox = document.querySelector(`input[name="p-marcas"][value="${marcaNombre}"]`);
+                        if (checkbox) {
+                            checkbox.checked = true;
+                        }
+                    });
+                }
+            }
+
+            // Llamar a la función cuando la página se cargue
+            window.addEventListener('load', marcarCheckboxesDesdeURL);
+
+
+// Función para restaurar los valores de precio al cargar la página
+            function restaurarValoresDePrecio() {
+                const parametrosURL = new URLSearchParams(window.location.search);
+                const precioMinInput = document.getElementById('precioMin');
+                const precioMaxInput = document.getElementById('precioMax');
+
+                precioMinInput.value = parametrosURL.get('p-min') || '';
+                precioMaxInput.value = parametrosURL.get('p-max') || '';
+            }
+
+// Llamar a la función para restaurar los valores de precio cuando se carga la página
+            window.addEventListener('load', restaurarValoresDePrecio);
+
+
+        </script>
+
+    </body>
+</html>

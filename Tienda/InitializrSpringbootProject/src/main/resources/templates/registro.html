@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
+
+        <h1>Registro</h1>
+        <form th:action="@{/registro}" method="POST" th:object="${usuario}">
+            <div>
+                <label>Nombre: </label>
+                <input type="text" name="nombre" th:field="*{nombre}">
+            </div>
+            <div>
+                <label>Apellido: </label>
+                <input type="text" name="apellido" th:field="*{apellido}">
+            </div>
+            <div>
+                <label>Email: </label>
+                <input type="text" name="nombre" th:field="*{email}">
+            </div>
+            <div>
+                <label>Contraseña: </label>
+                <input type="password" name="apellido" th:field="*{password}">
+            </div>
+            <div>
+                <button type="submit">Registrar</button>
+            </div>
+            <div>
+                Si ya tienes una cuenta, <a th:href="@{/login}"> inicia sesión aqui</a>
+            </div>
+
+        </form>
+    </body>
+</html>

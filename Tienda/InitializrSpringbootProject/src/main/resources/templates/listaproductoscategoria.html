@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
+
+
+        <h1 class="titulo-principal" th:each="categoriaunica : ${categoriaactual}" th:text="${categoriaunica.nombre}"></h1>
+        <div class="caja-grupo-filtros-y-productos">
+
+            <!-- UBICACIÓN Y NOMBRE DEL DOCUMENTO HTML :: NOMBRE DEL FRAGMENTO -->        
+            <form class="formulario-filtros"  th:each="categoriaunica : ${categoriaactual}" th:action="@{/productos/{nombre}(nombre=${categoriaunica.nombre})}" autocomplete="off" method="GET">
+                <h2 class="titulo-h2">Filtrar por</h2>
+                <!-- MENU DE FILTROS -->
+                <div th:insert="fragments/filtros-busqueda :: fragmento-marca"></div>
+                <div th:insert="fragments/filtros-busqueda :: fragmento-precio"></div>
+                <div class="boton-filtrar-precio">
+                    <input type="submit" value="Filtrar por precios" onclick="filtrarProductos()">  
+                </div>
+                <div th:insert="fragments/filtros-busqueda :: fragmento-oferta"></div>
+            </form>    
+            <div>
+                <div th:insert="fragments/cuadros-productos :: fragmento-productos"></div>
+            </div>
+        </div>
+        <script>
+            function filtrarProductos() {
+                // Obtener todas las casillas de verificación marcadas
+                const checkboxes = document.querySelectorAll('input[name="p-marcas"]:checked');
+
+                // Obtener los valores seleccionados y crear una lista separada por comas
+                const valoresMarcas = Array.from(checkboxes).map(checkbox => checkbox.value).join(',');
+
+
+                // Obtener los valores de precio mínimo y máximo
+                const minPrecio = document.querySelector('input[name="p-min"]').value;
+                const maxPrecio = document.querySelector('input[name="p-max"]').value;
+
+                // Verificar si la casilla de oferta está marcada
+                // const enOferta = document.querySelector('input[name="p-oferta"]').value;
+                const enOferta = document.querySelector('input[name="p-oferta"]').checked;
+
+
+                const nombreCategoria = document.querySelector('h1').textContent;
+                // Construir la URL con los valores seleccionados
+                let url = `/productos/${nombreCategoria}?`;
+
+                if (valoresMarcas) {
+                    url += `p-marcas=${valoresMarcas}&`;
+                }
+
+
+                if (minPrecio) {
+                    url += `p-min=${minPrecio}&`;
+                }
+
+                if (maxPrecio) {
+                    url += `p-max=${maxPrecio}&`;
+                }
+
+                if (enOferta) {
+                    url += `p-oferta=true&`;
+                }
+
+
+                // Eliminar el último carácter '&' si está presente
+                if (url.endsWith('&')) {
+                    url = url.slice(0, -1);
+                }
+
+                // Prevenir el envío predeterminado del formulario
+                event.preventDefault();
+
+                // Redirigir al usuario a la URL filtrada
+                window.location.href = url;
+            }
+
+
+
+
+
+
+
+            // Función para marcar los checkboxes basados en los parámetros de la URL
+            function marcarCheckboxesDesdeURL() {
+                const parametrosURL = new URLSearchParams(window.location.search);
+                const marcasSeleccionadas = parametrosURL.get('p-marcas');
+
+                if (marcasSeleccionadas) {
+                    const marcaNombres = marcasSeleccionadas.split(',');
+
+                    marcaNombres.forEach(marcaNombre => {
+                        const checkbox = document.querySelector(`input[name="p-marcas"][value="${marcaNombre}"]`);
+                        if (checkbox) {
+                            checkbox.checked = true;
+                        }
+                    });
+                }
+            }
+
+            // Llamar a la función cuando la página se cargue
+            window.addEventListener('load', marcarCheckboxesDesdeURL);
+
+            function marcarCheckboxOferta() {
+                const parametrosURL = new URLSearchParams(window.location.search);
+                const ofertaSeleccionada = parametrosURL.get('p-oferta');
+
+                // Verificar si el valor de 'p-oferta' en la URL es "true"
+                if (ofertaSeleccionada === "true") {
+                    const checkbox = document.querySelector('input[name="p-oferta"]');
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                }
+            }
+
+            // Llamar a la función cuando la página se cargue
+            window.addEventListener('load', marcarCheckboxOferta);
+
+// Función para restaurar los valores de precio al cargar la página
+            function restaurarValoresDePrecio() {
+                const parametrosURL = new URLSearchParams(window.location.search);
+                const precioMinInput = document.getElementById('precioMin');
+                const precioMaxInput = document.getElementById('precioMax');
+
+                precioMinInput.value = parametrosURL.get('p-min') || '';
+                precioMaxInput.value = parametrosURL.get('p-max') || '';
+            }
+
+// Llamar a la función para restaurar los valores de precio cuando se carga la página
+            window.addEventListener('load', restaurarValoresDePrecio);
+
+
+        </script>
+
+    </body>
+</html>
