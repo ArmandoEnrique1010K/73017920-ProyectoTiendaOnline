@@ -7,7 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface ProductoService {
-
+    
+    // LISTAR TODOS LOS PRODUCTOS
     public List<ProductoEntity> ListarProductosHabilitadosPorFiltrosDeBusqueda(
             Long categoriaId,
             List<Long> marcaIds,
@@ -16,6 +17,8 @@ public interface ProductoService {
             Boolean enOferta,
             String palabraClave
     );
+    
+    
     
     public Page<ProductoEntity> ListarPorPaginasProductosHabilitadosPorFiltrosDeBusqueda(
             Long categoriaId,
@@ -27,6 +30,7 @@ public interface ProductoService {
             Pageable pageable
     );
     
+    // CONTAR TODOS LOS PRODUCTOS
     public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(
             Long categoriaId,
             List<Long> marcaIds,
@@ -35,12 +39,7 @@ public interface ProductoService {
             Boolean enOferta,
             String palabraClave
     );
-    
-    
-    
-    
-    public List<ProductoEntity> ListarTodo();
-    
+
     public List<ProductoEntity> ListarProductosPorFiltrosDeBusqueda(
             Long categoriaId,
             List<Long> marcaIds,
@@ -59,6 +58,7 @@ public interface ProductoService {
             String palabraClave
     );
 
+    // METODOS PARA LOS ADMINISTRADORES
     public ProductoEntity GuardarProducto(ProductoEntity productoEntity);
     public ProductoEntity ObtenerProductoPorId(Long id);
     public ProductoEntity ActualizarProducto(ProductoEntity productoEntity);

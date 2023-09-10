@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/style.css}" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="caja-cabecera">
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-1"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-categorias-desktop"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-2-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
+            <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
+        </div>
+        <div>
+            <h1>Agregar nuevo producto</h1>
+            <form th:action="@{/admin/productos/nuevo}" th:object="${productoEntity}" method="POST" autocomplete="off" enctype="multipart/form-data">
+
+                <div>
+                    <label>Codigo: </label>
+                    <input type="text" name="codigo" th:field="*{codigo}" placeholder="codigo del producto">
+                </div>
+
+
+                <div>
+                    <label>Nombre: </label>
+                    <input type="text" name="nombre" th:field="*{nombre}" placeholder="nombre del producto">
+                </div>
+
+                <div>
+                    <label>Oferta: </label>
+                    <input type="checkbox" name="oferta" th:field="*{oferta}">
+                </div>
+
+                <div>
+                    <label>Precio normal: </label>
+                    <input type="number" name="precionormal" th:field="*{precionormal}">
+                </div>
+
+                <div>
+                    <label>Precio oferta: </label>
+                    <input type="number" name="preciooferta" th:field="*{preciooferta}">
+                </div>
+
+                <div>
+                    <label>Categoria: </label>
+                    <select th:field="*{categoriaEntity}" required>
+                        <option value="">Seleccione una categoria</option>
+                        <option th:each="categoriaunica : ${listacategorias}" 
+                                th:value="${categoriaunica.id_categoria}" 
+                                th:text="${categoriaunica.nombre}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Marca: </label>
+                    <select th:field="*{marcaEntity}" required>
+                        <option value="">Seleccione una marca</option>
+                        <option th:each="marcaunica : ${listamarcas}" 
+                                th:value="${marcaunica.id_marca}" 
+                                th:text="${marcaunica.nombre}"></option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label>Imagen: </label>
+                    <input type="file" name="imagen" th:field="*{imagenProductoEntity.imagen}" 
+                           accept=".jpg, .jpeg, .png, .gif">
+
+                </div>
+
+                <div>
+                    <button type="input">Agregar producto</button>
+                </div>
+                
+                
+            </form>
+        </div>
+    </body>
+</html>

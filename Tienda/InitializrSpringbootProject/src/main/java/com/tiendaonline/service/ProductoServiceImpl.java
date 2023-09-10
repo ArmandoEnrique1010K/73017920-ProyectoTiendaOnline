@@ -22,6 +22,7 @@ public class ProductoServiceImpl implements ProductoService{
     @Autowired
     private ImagenProductoServiceImpl imagenProductoServiceImpl;
     
+    // LISTAR TODOS LOS PRODUCTOS QUE ESTAN HABILITADOS POR FILTROS DE BUSQUEDA
     @Override
     public List<ProductoEntity> ListarProductosHabilitadosPorFiltrosDeBusqueda(
             Long categoriaId,
@@ -31,12 +32,6 @@ public class ProductoServiceImpl implements ProductoService{
             Boolean enOferta,
             String palabraClave) {
         return productoRepository.findAllByEstadoTrueAndParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave);
-    }
-
-    // PRUEBA
-    @Override
-    public List<ProductoEntity> ListarTodo() {
-        return productoRepository.findAll();
     }
 
     @Override
@@ -49,23 +44,36 @@ public class ProductoServiceImpl implements ProductoService{
             String palabraClave) {
         return productoRepository.findAllByParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave);
     }
-
+    
+    // CONTAR TODOS LOS PRODUCTOS QUE ESTAN HABILITADOS POR FILTROS DE BUSQUEDA
     @Override
-    public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(Long categoriaId, List<Long> marcaIds, Double minPrecio, Double maxPrecio, Boolean enOferta, String palabraClave) {
+    public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(
+            Long categoriaId, 
+            List<Long> marcaIds, 
+            Double minPrecio, 
+            Double maxPrecio, 
+            Boolean enOferta, 
+            String palabraClave) {
         return productoRepository.countAllByEstadoTrueAndParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave);
     }
 
     @Override
-    public Long ContarProductosPorFiltrosDeBusqueda(Long categoriaId, List<Long> marcaIds, Double minPrecio, Double maxPrecio, Boolean enOferta, String palabraClave) {
+    public Long ContarProductosPorFiltrosDeBusqueda(
+            Long categoriaId, 
+            List<Long> marcaIds, 
+            Double minPrecio, 
+            Double maxPrecio, 
+            Boolean enOferta, 
+            String palabraClave) {
         return productoRepository.countAllByParams(categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave);
     }
-
+    
+    // METODOS PARA ADMINISTRADORES
     @Override
     public ProductoEntity GuardarProducto(ProductoEntity productoEntity) {
         ImagenProductoEntity imagenProducto = imagenProductoRepository.save(productoEntity.getImagenProductoEntity());
         String rutaImagen = imagenProductoServiceImpl.almacenarUnaImagen(productoEntity.getImagenProductoEntity().getImagen());
         imagenProducto.setRutaImagen(rutaImagen);
-        
         productoEntity.setEstado(true);
         productoEntity.setImagenProductoEntity(imagenProducto);
         return productoRepository.save(productoEntity);

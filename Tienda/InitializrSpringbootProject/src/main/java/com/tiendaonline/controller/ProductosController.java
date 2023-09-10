@@ -44,21 +44,24 @@ public class ProductosController {
             Model modelo
     ) {
 
+        // ¿EL CLIENTE, ESTA AUTORIZADO COMO ADMINISTRADOR?
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         boolean isAdmin = authentication != null
                 && authentication.isAuthenticated()
                 && authentication.getAuthorities().stream()
                         .anyMatch(role -> role.getAuthority().equals("ADMIN"));
 
         if (isAdmin == true) {
+            // SI ES UN ADMINISTRADOR...
             modelo.addAttribute("productos", productoService.ListarProductosPorFiltrosDeBusqueda(
                     categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
         } else {
+            // SI ES UN USUARIO O NO ESTA REGISTRADO
             modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
                     categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
         }
 
+        
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         modelo.addAttribute("marcas", marcaService.ListarMarcasByEstadoTrue());
 
@@ -105,9 +108,27 @@ public class ProductosController {
     ) {
         CategoriaEntity categoria = categoriaService.ObtenerCategoriaPorNombre(categoriaNombre);
 
-        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
-                categoria.getId_categoria(), marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        // ¿EL CLIENTE, ESTA AUTORIZADO COMO ADMINISTRADOR?
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication != null
+                && authentication.isAuthenticated()
+                && authentication.getAuthorities().stream()
+                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
 
+        if (isAdmin == true) {
+            // SI ES UN ADMINISTRADOR...
+            modelo.addAttribute("productos", productoService.ListarProductosPorFiltrosDeBusqueda(
+                    categoria.getId_categoria(), marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        } else {
+            // SI ES UN USUARIO O NO ESTA REGISTRADO
+            modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                    categoria.getId_categoria(), marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        }
+
+        
+        
+        
+        
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         modelo.addAttribute("categoriaactual", categoriaService.ObtenerCategoriaPorNombre(categoriaNombre));
         modelo.addAttribute("marcas", marcaService.ListarDistintasMarcasByGrupoCategoriaAndEstadoTrue(categoriaNombre));
@@ -123,9 +144,25 @@ public class ProductosController {
             @RequestParam(value = "p-palabraclave", required = false) String palabraClave,
             Model modelo
     ) {
-        /* Todos los productos están en oferta, por lo tanto no se va a requerir del parametro oferta */
-        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
-                categoriaId, marcaIds, minPrecio, maxPrecio, true, palabraClave));
+        
+        
+        // ¿EL CLIENTE, ESTA AUTORIZADO COMO ADMINISTRADOR?
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication != null
+                && authentication.isAuthenticated()
+                && authentication.getAuthorities().stream()
+                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+
+        if (isAdmin == true) {
+            // SI ES UN ADMINISTRADOR...
+            modelo.addAttribute("productos", productoService.ListarProductosPorFiltrosDeBusqueda(
+                    categoriaId, marcaIds, minPrecio, maxPrecio, true, palabraClave));
+        } else {
+            // SI ES UN USUARIO O NO ESTA REGISTRADO
+            modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                    categoriaId, marcaIds, minPrecio, maxPrecio, true, palabraClave));
+        }
+
 
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         modelo.addAttribute("marcas", marcaService.ListarMarcasByEstadoTrue());
@@ -142,16 +179,36 @@ public class ProductosController {
             @RequestParam(value = "p-palabraclave", required = false) String palabraClave,
             Model modelo
     ) {
-        modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
-                categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        
+        
+        // ¿EL CLIENTE, ESTA AUTORIZADO COMO ADMINISTRADOR?
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication != null
+                && authentication.isAuthenticated()
+                && authentication.getAuthorities().stream()
+                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
 
-        modelo.addAttribute("contarproductos", productoService.ContarProductosHabilitadosPorFiltrosDeBusqueda(
-                categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        if (isAdmin == true) {
+            // SI ES UN ADMINISTRADOR...
+            modelo.addAttribute("productos", productoService.ListarProductosPorFiltrosDeBusqueda(
+                    categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+            modelo.addAttribute("contarproductos", productoService.ContarProductosPorFiltrosDeBusqueda(
+                    categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        } else {
+            // SI ES UN USUARIO O NO ESTA REGISTRADO
+            modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(
+                    categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+            modelo.addAttribute("contarproductos", productoService.ContarProductosHabilitadosPorFiltrosDeBusqueda(
+                    categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+        }
+        
 
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         modelo.addAttribute("marcas", marcaService.ListarMarcasByEstadoTrue());
         modelo.addAttribute("palabraClave", palabraClave);
         return "listaproductosbusqueda.html";
     }
+    
+    
 
 }

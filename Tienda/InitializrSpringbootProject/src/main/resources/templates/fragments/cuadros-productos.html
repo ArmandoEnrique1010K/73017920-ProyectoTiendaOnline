@@ -8,42 +8,52 @@
     <body>
         <!-- TABLA DE PRODUCTOS -->
         <div th:fragment = "fragmento-productos">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Oferta</th>
-                        <th>Precio normal</th>
-                        <th>Precio de oferta</th>
-                        <th>Estado Producto</th>
-                        <th>Categoria</th>
-                        <th>Estado Categoria</th>
-                        <th>Marca</th>
-                        <th>Estado Marca</th>
-                        <th>Imagen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="registro: ${productos}">
-                        <td th:text="${registro.id_producto}"></td>
-                        <td th:text="${registro.nombre}"></td>
-                        <td th:text="${registro.oferta}"></td>
-                        <td th:text="${registro.precionormal}"></td>
-                        <td th:text="${registro.preciooferta}"></td>
-                        <td th:text="${registro.estado}"></td>
-                        <!-- OBTENER LOS VALORES "NOMBRE" Y "ESTADO" DE CADA UNA DE LAS TABLAS A LA QUE ESTA RELACIONADA PRODUCTOS -->
-                        <td th:text="${registro.categoriaEntity.nombre}"></td>
-                        <td th:text="${registro.categoriaEntity.estado}"></td>
-                        <td th:text="${registro.marcaEntity.nombre}"></td>
-                        <td th:text="${registro.marcaEntity.estado}"></td>
-                        <td>
-                            <!-- ATRIBUTO LOADING MODIFICA SI LA IMAGEN SE VA A CARGAR CUANDO EL USUARIO SE DESPLAZE HACIA DONDE SE ENCUENTRE LA IMAGEN (lazy) O INMEDIATAMENTE (eager)-->
-                            <img th:src="@{/assets/productos/{filename}(filename=${registro.imagenProductoEntity.rutaImagen})}" width="250px" loading="lazy" >
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- SOLAMENTE PARA ADMINISTRADORES, VA A APARECER EL BOTON DE AGREGAR PRODUCTO -->
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/productos/nuevo}">Agregar Producto</a>
+            </div>
+
+            <!-- DISEÑO DE CUADRICULA -->
+            <div>
+                <!-- CADA CUADRICULA -->
+                <div th:each="producto : ${productos}">
+                    <!-- COLUMNAS -->
+                    <div>
+                        <!-- IMAGEN -->
+                        <img th:src="@{/assets/productos/{filename}(filename=${producto.imagenProductoEntity.rutaImagen})}" width="250px" loading="lazy" >
+                    </div>
+                    <div>
+                        <!-- MARCA -->
+                        <div>
+                            <span th:text="${producto.marcaEntity.nombre}"></span>
+                        </div>
+                        <!-- NOMBRE -->
+                        <div>
+                            <span th:text="${producto.nombre}"></span>
+                        </div>
+                        <!-- CODIGO -->
+                        <div>
+                            Código: <span th:text="${producto.codigo}"></span>
+                        </div>
+                        <!-- PRECIO EN FUNCÍÓN DEL ESTADO -->
+                        <div th:if="${producto.estado == true}">
+                            <div th:if="${producto.preciooferta != null}">
+                                Precio de Oferta: S/. <span th:text="${#numbers.formatDecimal(producto.preciooferta, 3, 2)}"></span>
+                            </div>
+                            Precio Normal: S/. <span th:text="${#numbers.formatDecimal(producto.precionormal, 3, 2)}"></span>
+                        </div>
+                        <div th:unless="${producto.estado == true}">
+                            Producto Agotado
+                        </div>
+                        <!-- RUTAS PARA ADMINISTRADORES -->
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </body>
 </html>

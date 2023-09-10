@@ -21,6 +21,7 @@ public class RolEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rol")
     private Long id_rol;
     @Column(name = "nombre")
     private String nombre;

@@ -15,6 +15,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Builder
 @Entity
 @Data
@@ -36,28 +39,31 @@ public class ProductoEntity {
     private Boolean oferta;
     @Column(name = "precionormal")
     private Double precionormal;
+
     @Column(name = "preciooferta")
     private Double preciooferta;
     @Column(name = "estado")
     private Boolean estado;
-       
+
     // Relacion hacia detallesproductos
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_detallesproducto")
     private DetallesProductoEntity detallesproductoEntity;
-    
+
     // Relacion hacia categoria
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
     private CategoriaEntity categoriaEntity;
-    
+
     // Relacion hacia marca
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_marca")
     private MarcaEntity marcaEntity;
-    
+
     // Relacion hacia imagen
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imagen")
     private ImagenProductoEntity imagenProductoEntity;
+
+
 }

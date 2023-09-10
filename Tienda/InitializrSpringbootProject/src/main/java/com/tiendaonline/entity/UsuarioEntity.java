@@ -1,5 +1,6 @@
 package com.tiendaonline.entity;
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,9 +49,9 @@ public class UsuarioEntity {
             joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id_rol")
     )
-    private List<RolEntity> roles;
+    private Collection<RolEntity> roles;
 
-    public UsuarioEntity(String nombre, String apellido, String email, String password, List<RolEntity> roles) {
+    public UsuarioEntity(String nombre, String apellido, String email, String password, Collection<RolEntity> roles) {
         super();
         this.nombre = nombre;
         this.apellido = apellido;
