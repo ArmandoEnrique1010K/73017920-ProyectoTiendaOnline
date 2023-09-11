@@ -56,7 +56,7 @@ public class AdminController {
         return "redirect:/productos";
     }
 
-    @GetMapping("/{id_producto}/editar")
+    @GetMapping("/editar/{id_producto}")
     public String mostrarFormularioDeEditarProducto(@PathVariable Long id_producto, Model modelo) {
         modelo.addAttribute("categorias", categoriaService.ListarCategoriasByEstadoTrue());
         var varUnRegistro = productoService.ObtenerProductoPorId(id_producto);
@@ -70,7 +70,7 @@ public class AdminController {
         return "form_editarproducto";
     }
 
-    @PostMapping("/{id_producto}/editar")
+    @PostMapping("/editar/{id_producto}")
     public String actualizarProductoEditado(
             @PathVariable Long id_producto,
             @ModelAttribute("productoEntity") ProductoEntity productoEntity,
@@ -81,19 +81,19 @@ public class AdminController {
         return "redirect:/productos";
     }
 
-    @GetMapping("/{id_producto}/cambioestadoafalse")
+    @GetMapping("/cambioestadoafalse/{id_producto}")
     public String cambiarEstadoTrueaFalse(@PathVariable Long id_producto) {
         productoService.CambiarEstadoProductoAFalse(id_producto);
         return "redirect:/productos";
     }
 
-    @GetMapping("/{id_producto}/cambioestadoatrue")
+    @GetMapping("/cambioestadoatrue/{id_producto}")
     public String cambiarEstadoFalseaTrue(@PathVariable Long id_producto) {
         productoService.CambiarEstadoProductoATrue(id_producto);
         return "redirect:/productos";
     }
 
-    @GetMapping("/{id_producto}/eliminardefinitivamente")
+    @GetMapping("/eliminardefinitivamente/{id_producto}")
     public String eliminarDefinitivamente(@PathVariable Long id_producto) {
         ProductoEntity personaEntity = productoService.ObtenerProductoPorId(id_producto);
         productoService.EliminarDefinitivamente(id_producto);

@@ -38,27 +38,27 @@
                         <!-- PRECIO EN FUNCÍÓN DEL ESTADO -->
                         <div th:if="${producto.estado == true}">
                             <div th:if="${producto.preciooferta != null}">
-                                Precio de Oferta: S/. <span th:text="${#numbers.formatDecimal(producto.preciooferta, 3, 2)}"></span>
+                                Precio de Oferta: S/. <span th:text="${#numbers.formatDecimal(producto.preciooferta, 1, 2)}"></span>
                             </div>
-                            Precio Normal: S/. <span th:text="${#numbers.formatDecimal(producto.precionormal, 3, 2)}"></span>
+                            Precio Normal: S/. <span th:text="${#numbers.formatDecimal(producto.precionormal, 1, 2)}"></span>
                         </div>
                         <div th:unless="${producto.estado == true}">
                             Producto Agotado
                         </div>
                         <!-- RUTAS PARA ADMINISTRADORES -->
-                        <div>
+                        <div sec:authorize="hasAuthority('ADMIN')">
                             
                             <div>
-                                <a th:href="@{/productos/{id_producto}/editar (id_producto = ${producto.id_producto}) }">Editar</a>
+                                <a th:href="@{/productos/editar/{id_producto} (id_producto = ${producto.id_producto}) }">Editar</a>
                             </div>
                             <div th:if="${producto.estado == true}">
-                                <a th:href="@{/productos/{id_producto}/cambioestadoafalse (id_producto = ${producto.id_producto}) }">Inhabilitar</a>
+                                <a th:href="@{/productos/cambioestadoafalse/{id_producto} (id_producto = ${producto.id_producto}) }">Inhabilitar</a>
                             </div>
                             <div th:unless="${producto.estado == true}">
-                                <a th:href="@{/productos/{id_producto}/cambioestadoatrue (id_producto = ${producto.id_producto}) }">Habilitar</a>
+                                <a th:href="@{/productos/cambioestadoatrue/{id_producto} (id_producto = ${producto.id_producto}) }">Habilitar</a>
                             </div>
                             <div>
-                                <a th:href="@{/productos/{id_producto}/eliminardefinitivamente (id_producto = ${producto.id_producto}) }">Eliminar</a>
+                                <a th:href="@{/productos/eliminardefinitivamente/{id_producto} (id_producto = ${producto.id_producto}) }">Eliminar</a>
                             </div>
                         </div>
                     </div>

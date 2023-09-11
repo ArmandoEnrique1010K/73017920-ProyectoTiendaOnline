@@ -50,7 +50,13 @@ public class SecurityConfig {
         httpsecurity
                 .csrf().disable()
                 .authorizeHttpRequests(
-                        authorize -> authorize.antMatchers("/productos/nuevo").hasAuthority("ADMIN")
+                        authorize -> authorize.antMatchers(
+                                "/productos/nuevo", 
+                                "/productos/editar/**",
+                                "/productos/cambioestadoafalse/**",
+                                "/productos/cambioestadoatrue/**",
+                                "/productos/eliminardefinitivamente/**"
+                                ).hasAuthority("ADMIN")
                                 .anyRequest().permitAll()
                 )
                 .formLogin(
