@@ -44,6 +44,7 @@ public class ProductosController {
             Model modelo
     ) {
 
+        
         // ¿EL CLIENTE, ESTA AUTORIZADO COMO ADMINISTRADOR?
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAdmin = authentication != null

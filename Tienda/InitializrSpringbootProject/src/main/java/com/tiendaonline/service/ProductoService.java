@@ -19,7 +19,7 @@ public interface ProductoService {
     );
     
     
-    
+    /*
     public Page<ProductoEntity> ListarPorPaginasProductosHabilitadosPorFiltrosDeBusqueda(
             Long categoriaId,
             List<Long> marcaIds,
@@ -29,7 +29,7 @@ public interface ProductoService {
             String palabraClave,
             Pageable pageable
     );
-    
+    */
     // CONTAR TODOS LOS PRODUCTOS
     public Long ContarProductosHabilitadosPorFiltrosDeBusqueda(
             Long categoriaId,
@@ -60,8 +60,10 @@ public interface ProductoService {
 
     // METODOS PARA LOS ADMINISTRADORES
     public ProductoEntity GuardarProducto(ProductoEntity productoEntity);
-    public ProductoEntity ObtenerProductoPorId(Long id);
+    public ProductoEntity ObtenerProductoPorId(Long id_producto);
     public ProductoEntity ActualizarProducto(ProductoEntity productoEntity);
-    public void EliminarProducto(Long id);
+    public void CambiarEstadoProductoAFalse(Long id_producto);
+    public void CambiarEstadoProductoATrue(Long id_producto);
+    public void EliminarDefinitivamente(Long id_producto);
 
 }

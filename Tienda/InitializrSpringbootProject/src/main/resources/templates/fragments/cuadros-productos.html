@@ -48,6 +48,18 @@
                         <!-- RUTAS PARA ADMINISTRADORES -->
                         <div>
                             
+                            <div>
+                                <a th:href="@{/productos/{id_producto}/editar (id_producto = ${producto.id_producto}) }">Editar</a>
+                            </div>
+                            <div th:if="${producto.estado == true}">
+                                <a th:href="@{/productos/{id_producto}/cambioestadoafalse (id_producto = ${producto.id_producto}) }">Inhabilitar</a>
+                            </div>
+                            <div th:unless="${producto.estado == true}">
+                                <a th:href="@{/productos/{id_producto}/cambioestadoatrue (id_producto = ${producto.id_producto}) }">Habilitar</a>
+                            </div>
+                            <div>
+                                <a th:href="@{/productos/{id_producto}/eliminardefinitivamente (id_producto = ${producto.id_producto}) }">Eliminar</a>
+                            </div>
                         </div>
                     </div>
                 </div>

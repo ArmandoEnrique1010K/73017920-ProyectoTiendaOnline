@@ -17,9 +17,10 @@
             <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
         </div>
         <div>
-            <h1>Agregar nuevo producto</h1>
-            <form th:action="@{/productos/nuevo}" th:object="${productoEntity}" method="POST" autocomplete="off" enctype="multipart/form-data">
-
+            <h1>Editar el producto seleccionado</h1>
+            <form th:action="@{/productos/{id_producto}/editar (id_producto=${productoEntity.id_producto})}" 
+                  th:object="${productoEntity}" method="POST" autocomplete="off" enctype="multipart/form-data">
+            
                 <div>
                     <label>Codigo: </label>
                     <input type="text" name="codigo" th:field="*{codigo}" placeholder="codigo del producto">
@@ -48,7 +49,7 @@
 
                 <div>
                     <label>Categoria: </label>
-                    <select th:field="*{categoriaEntity}" required>
+                    <select th:field="*{categoriaEntity.id_categoria}" required>
                         <option value="">Seleccione una categoria</option>
                         <option th:each="categoriaunica : ${listacategorias}" 
                                 th:value="${categoriaunica.id_categoria}" 
@@ -57,7 +58,7 @@
                 </div>
                 <div>
                     <label>Marca: </label>
-                    <select th:field="*{marcaEntity}" required>
+                    <select th:field="*{marcaEntity.id_marca}" required>
                         <option value="">Seleccione una marca</option>
                         <option th:each="marcaunica : ${listamarcas}" 
                                 th:value="${marcaunica.id_marca}" 
@@ -69,11 +70,10 @@
                     <label>Imagen: </label>
                     <input type="file" name="imagen" th:field="*{imagenProductoEntity.imagen}" 
                            accept=".jpg, .jpeg, .png, .gif">
-
                 </div>
 
                 <div>
-                    <button type="input">Agregar producto</button>
+                    <button type="input">Guardar cambios</button>
                 </div>
                 
                 
