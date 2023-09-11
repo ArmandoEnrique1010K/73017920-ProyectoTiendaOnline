@@ -1,6 +1,6 @@
 # 73017920-ProyectoTiendaOnline
 
-- ENRIQUE:
+- ENRIQUE DICE:
 - Volvi a reestructurar el proyecto, el proyecto se esta construyendo con ApacheNetBeans con las tecnologias de Spring boot 2.7.15, MySQL, Thymeleaf y JavaScript.
 - ¿Como ejecutar la aplicación?
 - 1) Ejecutar el proyecto para crear la base de datos y las tablas con MySQL de forma automatica (cambia el nombre de usuario y la contraseña en el archivo properties).
