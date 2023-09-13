@@ -18,7 +18,7 @@
         </div>
         <div>
             <h1>Editar el producto seleccionado</h1>
-            <form th:action="@{/productos/{id_producto}/editar (id_producto=${productoEntity.id_producto})}" 
+            <form th:action="@{/productos/editar/{id_producto} (id_producto=${productoEntity.id_producto})}" 
                   th:object="${productoEntity}" method="POST" autocomplete="off" enctype="multipart/form-data">
             
                 <div>
