@@ -10,4 +10,4 @@
   5) En MySQL, seleccionar las tablas "Usuario" y "Rol", cambiar el Rol, de preferencia del primer usuario de "USER" a "ADMIN" de forma manual.
   6) Iniciar sesion en la aplicacion web con el usuario que tiene el Rol de "ADMIN".
   7) Los usuarios con el Rol de "ADMIN" pueden modificar los productos. 
-- Debido a la alta complejidad del proyecto y la falta del tiempo porque estoy en el trabajo, decidi dejarlo por el momento como un catalogo de productos, en donde los usuarios con el rol de "ADMIN" podran editar los productos.
+  8) NO USAR EL CARRITO DE COMPRAS
