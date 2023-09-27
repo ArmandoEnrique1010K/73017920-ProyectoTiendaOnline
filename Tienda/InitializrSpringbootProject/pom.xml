@@ -70,6 +70,15 @@
             <artifactId>spring-web</artifactId>
             <type>jar</type>
         </dependency>
+        <!-- NO ACTIVAR ESA DEPENDENCIA, COLAPSA TODO EL SISTEMA -->
+        <!--
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>6.1.3</version>
+            <type>jar</type>
+        </dependency>
+                -->
     </dependencies>
 
     <build>

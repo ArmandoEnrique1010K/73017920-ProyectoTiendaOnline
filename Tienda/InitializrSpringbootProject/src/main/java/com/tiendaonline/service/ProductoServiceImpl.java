@@ -213,6 +213,8 @@ public class ProductoServiceImpl implements ProductoService {
     public void EliminarDefinitivamente(Long id_producto) {
         ProductoEntity productoEntity = productoRepository.findById(id_producto).orElse(null);
         if (productoEntity != null) {
+            // Eliminar el registro de la base de datos
+            productoRepository.delete(productoEntity);
             // Obtener la ruta de la imagen asociada
             String rutaImagen = productoEntity.getImagenProductoEntity().getRutaImagen();
             // Eliminar físicamente el archivo de la imagen
@@ -222,10 +224,7 @@ public class ProductoServiceImpl implements ProductoService {
                     archivoImagen.delete();
                 }
             }
-            // Eliminar el registro de la base de datos
-            productoRepository.delete(productoEntity);
         }
 
-        
     }
 }

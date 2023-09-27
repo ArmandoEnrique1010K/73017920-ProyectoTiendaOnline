@@ -8,9 +8,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -24,15 +21,6 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoderProvider passwordEncoder;
 
-    // PARA PRUEBAS
-    /*
-    @Bean
-    public InMemoryUserDetailsManager UserDetailsService() {
-        UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("password").authorities("ADMIN").build();
-        UserDetails user = User.withDefaultPasswordEncoder().username("user").password("password").authorities("USER").build();
-        return new InMemoryUserDetailsManager(admin, user);
-    }
-     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
@@ -56,7 +44,10 @@ public class SecurityConfig {
                                 "/productos/cambioestadoafalse/**",
                                 "/productos/cambioestadoatrue/**",
                                 "/productos/eliminardefinitivamente/**"
-                                ).hasAuthority("ADMIN")
+                                ).hasAuthority("ROLE_ADMIN")
+                                /*carrito de compras*/
+                                .antMatchers("/cart").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                                /**/
                                 .anyRequest().permitAll()
                 )
                 .formLogin(
@@ -81,3 +72,18 @@ public class SecurityConfig {
     }
 
 }
+/*
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+*/
+
+    // PARA PRUEBAS
+    /*
+    @Bean
+    public InMemoryUserDetailsManager UserDetailsService() {
+        UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("password").authorities("ADMIN").build();
+        UserDetails user = User.withDefaultPasswordEncoder().username("user").password("password").authorities("USER").build();
+        return new InMemoryUserDetailsManager(admin, user);
+    }
+     */

@@ -50,7 +50,7 @@ public class ProductosController {
         boolean isAdmin = authentication != null
                 && authentication.isAuthenticated()
                 && authentication.getAuthorities().stream()
-                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin == true) {
             // SI ES UN ADMINISTRADOR...
@@ -114,7 +114,7 @@ public class ProductosController {
         boolean isAdmin = authentication != null
                 && authentication.isAuthenticated()
                 && authentication.getAuthorities().stream()
-                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin == true) {
             // SI ES UN ADMINISTRADOR...
@@ -152,7 +152,7 @@ public class ProductosController {
         boolean isAdmin = authentication != null
                 && authentication.isAuthenticated()
                 && authentication.getAuthorities().stream()
-                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin == true) {
             // SI ES UN ADMINISTRADOR...
@@ -187,7 +187,7 @@ public class ProductosController {
         boolean isAdmin = authentication != null
                 && authentication.isAuthenticated()
                 && authentication.getAuthorities().stream()
-                        .anyMatch(role -> role.getAuthority().equals("ADMIN"));
+                        .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin == true) {
             // SI ES UN ADMINISTRADOR...

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,12 @@ public class UsuarioEntity {
     @Column(name = "password")
     private String password;
 
+    
+    @OneToMany(mappedBy = "usuarioEntity", cascade = CascadeType.ALL, 
+        orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<OrdenEntity> ordenEntity;
+   
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "usuario_roles", 
@@ -59,6 +66,7 @@ public class UsuarioEntity {
         this.password = password;
         this.roles = roles;
     }
+
     
 
 }

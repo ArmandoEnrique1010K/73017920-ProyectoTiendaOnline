@@ -9,7 +9,7 @@
         <!-- TABLA DE PRODUCTOS -->
         <div th:fragment = "fragmento-productos">
             <!-- SOLAMENTE PARA ADMINISTRADORES, VA A APARECER EL BOTON DE AGREGAR PRODUCTO -->
-            <div sec:authorize="hasAuthority('ADMIN')">
+            <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                 <a th:href="@{/productos/nuevo}">Agregar Producto</a>
             </div>
 
@@ -45,8 +45,23 @@
                         <div th:unless="${producto.estado == true}">
                             Producto Agotado
                         </div>
+                        
+                        
+                        <!-- AÑADIR AL CARRITO -->
+                        <div>
+                            <form th:action = "@{/cart}" method="POST">
+                                <input type="hidden" th:value="${producto.id_producto}" name="id_producto">
+                                <div>
+                                    Cantidad:
+                                    <input type="number" id="cantidad" name="cantidad" min="1" value="1">
+                                </div>
+                                <button type="submit">Añadir al carrito</button>
+                            </form>
+                        </div>
+                        
+                        
                         <!-- RUTAS PARA ADMINISTRADORES -->
-                        <div sec:authorize="hasAuthority('ADMIN')">
+                        <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                             
                             <div>
                                 <a th:href="@{/productos/editar/{id_producto} (id_producto = ${producto.id_producto}) }">Editar</a>

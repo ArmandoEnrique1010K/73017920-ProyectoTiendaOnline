@@ -16,8 +16,11 @@
             <div th:insert="fragments/cabecera-pie :: fragmento-cabecera-3-mobile"></div>
             <div th:insert="fragments/cabecera-pie :: fragmento-menu-hamburguesa-mobile"></div>
         </div>
-        <h1>
-            (((Súper precios en tus artículos favoritos)))
-        </h1>
+        <h1>(((Súper precios en tus artículos favoritos)))</h1>
+        <div sec:authorize="isAuthenticated()" th:text="${usuario_nombre} + ' ' + ${usuario_apellido}">
+        </div>
+        <div sec:authorize="isAuthenticated()" th:text="${usuario_roles}">
+        </div>
+
     </body>
 </html>

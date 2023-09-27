@@ -15,8 +15,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 @Builder
 @Entity
@@ -65,5 +66,43 @@ public class ProductoEntity {
     @JoinColumn(name = "id_imagen")
     private ImagenProductoEntity imagenProductoEntity;
 
+    
+    /* Relacion hacia detallesorden */
+    @OneToMany(mappedBy = "productoEntity", cascade = CascadeType.ALL, 
+        orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DetallesOrdenEntity> detallesOrdenEntity;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
