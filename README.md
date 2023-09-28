@@ -9,5 +9,5 @@
   4) Crear una nueva cuenta, de preferencia 2 cuentas, en donde a 1 de ellas le va a corresponder el Rol de "ADMIN".
   5) En MySQL, seleccionar las tablas "Usuario" y "Rol", cambiar el Rol, de preferencia del primer usuario de "USER" a "ADMIN" de forma manual.
   6) Iniciar sesion en la aplicacion web con el usuario que tiene el Rol de "ADMIN".
-  7) Los usuarios con el Rol de "ADMIN" pueden modificar los productos. 
-  8) NO USAR EL CARRITO DE COMPRAS
+  7) Los usuarios con el Rol de "ADMIN" pueden modificar los productos.
+  8) SOLAMENTE PROBAR EL BOTON PARA AÑADIR 1 PRODUCTO AL CARRITO
