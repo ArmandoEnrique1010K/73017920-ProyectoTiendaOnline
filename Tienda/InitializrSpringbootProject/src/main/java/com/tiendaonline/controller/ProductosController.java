@@ -56,6 +56,7 @@ public class ProductosController {
             // SI ES UN ADMINISTRADOR...
             modelo.addAttribute("productos", productoService.ListarProductosPorFiltrosDeBusqueda(
                     categoriaId, marcaIds, minPrecio, maxPrecio, enOferta, palabraClave));
+
         } else {
             // SI ES UN USUARIO O NO ESTA REGISTRADO
             modelo.addAttribute("productos", productoService.ListarProductosHabilitadosPorFiltrosDeBusqueda(

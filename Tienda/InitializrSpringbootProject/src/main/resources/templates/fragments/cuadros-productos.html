@@ -12,7 +12,14 @@
             <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                 <a th:href="@{/productos/nuevo}">Agregar Producto</a>
             </div>
+            
+            <!--  MENSAJE EN CASO DE QUE NO HAYA PRODUCTOS -->
+            <div th:if="${productos.isEmpty()}">
+                <p>NO HAY PRODUCTOS A LA VENTA, PRUEBE QUITANDO ALGUNOS FILTROS PARA MOSTRAR LOS PRODUCTOS :(</p>
+            </div>
 
+            <!-- TODOS LOS PRODUCTOS A LA VENTA :) -->
+            
             <!-- DISEÑO DE CUADRICULA -->
             <div>
                 <!-- CADA CUADRICULA -->
@@ -52,10 +59,10 @@
                             <form th:action = "@{/cart}" method="POST">
                                 <input type="hidden" th:value="${producto.id_producto}" name="id_producto">
                                 <div>
-                                    Cantidad:
-                                    <input type="number" id="cantidad" name="cantidad" min="1" value="1">
+                                    <!-- Cantidad: -->
+                                    <input type="hidden" id="cantidad" name="cantidad" min="1" value="1">
                                 </div>
-                                <button type="submit">Añadir al carrito</button>
+                                <button type="submit">Añadir 1 unidad al carrito</button>
                             </form>
                         </div>
                         

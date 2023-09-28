@@ -14,7 +14,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import javax.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,6 +30,78 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ComprasController {
 
+    private final Logger log = LoggerFactory.getLogger(ComprasController.class);
+    
+    @Autowired
+    private ProductoService productoService;
+    
+    @Autowired
+    private OrdenService ordenService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    // para almacenar los detalles de la orden
+    List<DetallesOrdenEntity> detalles = new ArrayList<>();
+
+    // datos de la orden
+    OrdenEntity orden = new OrdenEntity();
+
+    @PostMapping("/cart")
+    public String addCart(@RequestParam Long id_producto, @RequestParam Double cantidad, Model model) {
+        // Verifica si el producto ya está en el carrito
+        Optional<DetallesOrdenEntity> existingDetail = detalles.stream()
+                .filter(detail -> detail.getProductoEntity().getId_producto().equals(id_producto))
+                .findFirst();
+
+        if (existingDetail.isPresent()) {
+            // Si el producto ya está en el carrito, actualiza la cantidad y el total
+            DetallesOrdenEntity detalleOrdenExistente = existingDetail.get();
+            // detalleOrdenExistente.setCantidad(detalleOrdenExistente.getCantidad() + cantidad);
+            detalleOrdenExistente.setCantidad(detalleOrdenExistente.getCantidad());
+            detalleOrdenExistente.setTotal(detalleOrdenExistente.getPrecio() * detalleOrdenExistente.getCantidad());
+        } else {
+            // Si el producto no está en el carrito, agrega uno nuevo
+            ProductoEntity optionalProducto = productoService.ObtenerProductoPorId(id_producto);
+            if (optionalProducto != null) {
+                DetallesOrdenEntity detalleOrden = new DetallesOrdenEntity();
+                double precioProducto = (optionalProducto.getPreciooferta() != null)
+                        ? optionalProducto.getPreciooferta()
+                        : optionalProducto.getPrecionormal();
+                detalleOrden.setCantidad(cantidad);
+                detalleOrden.setPrecio(precioProducto);
+                detalleOrden.setNombre(optionalProducto.getNombre());
+                detalleOrden.setTotal(precioProducto * cantidad);
+                
+                detalleOrden.setProductoEntity(optionalProducto);
+                detalles.add(detalleOrden);
+            }
+        }
+
+        // Calcula el total del carrito
+        double sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+        orden.setTotal_a_pagar(sumaTotal);
+
+        model.addAttribute("cart", detalles);
+        model.addAttribute("orden", orden);
+
+        return "carrito.html";
+    }
+
+    
+    @GetMapping("/cart")
+    public String getCart(Model model, HttpSession session) {
+
+            model.addAttribute("cart", detalles);
+            model.addAttribute("orden", orden);
+
+            //sesion
+            model.addAttribute("sesion", session.getAttribute("id_usuario"));
+            log.info("sesion: " + session.getId());
+            return "carrito.html";
+    }
+
+    
     /*
     @Autowired
     private ProductoService productoService;
@@ -36,13 +112,10 @@ public class ComprasController {
     @Autowired
     private DetalleOrdenService detalleOrdenService;
 */
+
     
-    @Autowired
-    private OrdenService ordenService;
-
-    @Autowired
-    private UsuarioService usuarioService;
-
+    
+    
     /*
     @PostMapping("/cart")
     public String agregarProductoAlCarrito(

@@ -57,7 +57,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             .map(role -> role.getNombre())
             .collect(Collectors.toList());
     
-        log.info("TEST: {}", roles);
+        log.info("BIENVENIDO USUARIO: " + username);
+        log.info("TIENE EL ROL DE: {}", roles);
 
         /* Configurar los roles correctamente */
         return User.withUsername(usuarioEntity.getEmail())

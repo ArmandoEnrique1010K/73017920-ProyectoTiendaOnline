@@ -17,15 +17,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="dato_orden : ${cart}">
-                    <td th:text="${dato_orden.nombre}"></td>
-                    <td th:text="${dato_orden.precio}"></td>
-                    <td th:text="${dato_orden.cantidad}"></td>
-                    <td th:text="${dato_orden.total}"></td>
-
+                <tr th:each="dato_carrito : ${cart}">
+                    <td th:text="${dato_carrito.nombre}"></td>
+                    <td th:text="${dato_carrito.precio}"></td>
+                    <td th:text="${dato_carrito.cantidad}"></td>
+                    <td th:text="${dato_carrito.total}"></td>
                 </tr>
             </tbody>
             
         </table>
+        <div th:each="dato_orden : ${orden}">
+            USTED DEBE PAGAR: <span th:text="${dato_orden.total_a_pagar}"></span>
+        </div>
+        
+        <div th:text="${sesion}">
+            
+        </div>
+        
     </body>
 </html>

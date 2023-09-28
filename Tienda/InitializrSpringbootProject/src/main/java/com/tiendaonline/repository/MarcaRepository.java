@@ -15,11 +15,11 @@ public interface MarcaRepository extends JpaRepository<MarcaEntity, Long>{
     List<MarcaEntity> findAllByEstadoTrue();
     
     // LISTAR LAS DISTINTAS MARCAS QUE SE ENCUENTRAN DENTRO DE UN GRUPO DE PRODUCTOS QUE PERTENECEN A LA MISMA CATEGORIA
-    @Query("SELECT DISTINCT m FROM MarcaEntity m JOIN m.productoEntity p JOIN p.categoriaEntity c WHERE c.nombre = :nombreCategoria AND m.estado = true")
+    @Query("SELECT DISTINCT m FROM MarcaEntity m JOIN m.productoEntity p JOIN p.categoriaEntity c WHERE c.nombre = :nombreCategoria AND m.estado = true AND p.estado = true")
     List<MarcaEntity> findAllDistinctByCategoriaGroupAndEstadoTrue(@Param("nombreCategoria") String nombreCategoria);
 
     // LISTAR LAS DISTINTAS MARCAS QUE SE ENCUENTRAN DENTRO DE UN GRUPO DE PRODUCTOS QUE PERTENECEN A LA MISMA CATEGORIA
-    @Query("SELECT DISTINCT m FROM MarcaEntity m JOIN m.productoEntity p JOIN p.categoriaEntity c WHERE c.nombre = :nombreCategoria")
+    @Query("SELECT DISTINCT m FROM MarcaEntity m JOIN m.productoEntity p JOIN p.categoriaEntity c WHERE c.nombre = :nombreCategoria AND p.estado = true")
     List<MarcaEntity> findAllDistinctByCategoriaGroup(@Param("nombreCategoria") String nombreCategoria);
 
 
