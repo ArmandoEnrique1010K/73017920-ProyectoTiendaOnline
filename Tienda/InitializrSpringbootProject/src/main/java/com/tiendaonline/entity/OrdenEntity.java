@@ -31,6 +31,8 @@ public class OrdenEntity {
     private Long id_orden;
     @Column(name = "numero_orden")
     private String numero;
+    @Column(name = "fecha_creacion")
+    private Date fecha_creacion;   
     @Column(name = "fecha_recibida")
     private Date fecha_recibida;   
     @Column(name = "total_a_pagar")

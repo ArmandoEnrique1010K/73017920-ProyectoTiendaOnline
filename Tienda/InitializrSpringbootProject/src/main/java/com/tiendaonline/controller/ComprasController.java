@@ -72,8 +72,8 @@ public class ComprasController {
                 detalleOrden.setPrecio(precioProducto);
                 detalleOrden.setNombre(optionalProducto.getNombre());
                 detalleOrden.setTotal(precioProducto * cantidad);
-                
                 detalleOrden.setProductoEntity(optionalProducto);
+                
                 detalles.add(detalleOrden);
             }
         }
