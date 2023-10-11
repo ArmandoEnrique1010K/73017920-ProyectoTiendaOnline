@@ -44,11 +44,11 @@ public class UsuarioEntity {
     @Column(name = "password")
     private String password;
 
+
     
-    @OneToMany(mappedBy = "usuarioEntity", cascade = CascadeType.ALL, 
-        orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OrdenEntity> ordenEntity;
-   
+    @OneToMany(mappedBy = "usuarioEntity", /* cascade = CascadeType.ALL, 
+        orphanRemoval = true, */ fetch = FetchType.LAZY)
+    private List<CarritoEntity> carritoEntity;
     
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(

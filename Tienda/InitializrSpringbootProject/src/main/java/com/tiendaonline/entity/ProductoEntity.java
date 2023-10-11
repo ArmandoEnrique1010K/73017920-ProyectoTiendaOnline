@@ -66,17 +66,29 @@ public class ProductoEntity {
     @JoinColumn(name = "id_imagen")
     private ImagenProductoEntity imagenProductoEntity;
 
+    @OneToMany(mappedBy = "productoEntity", cascade = CascadeType.ALL, 
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DetallesCarritoEntity> detallesCarritoEntity;
+
+    
+}
+
+    /*
+    @OneToMany(mappedBy = "productoEntity", cascade = CascadeType.ALL, 
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DetallesCarrito_ProductoEntity> detallesCarrito_ProductoEntity;
+    */
+
+
+
     
     /* Relacion hacia detallesorden */
+    /*
     @OneToMany(mappedBy = "productoEntity", cascade = CascadeType.ALL, 
         orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DetallesOrdenEntity> detallesOrdenEntity;
-
-}
-
-
-
-
+    
+*/
 
 
 

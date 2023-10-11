@@ -1,5 +1,7 @@
 package com.tiendaonline.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,39 +10,45 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "detallesorden")
-
-public class DetallesOrdenEntity {
+@Getter
+@Setter
+@Table(name = "detallescarrito")
+public class DetallesCarritoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_detallesorden")
-    private Long id_detallesorden;
-    
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "id_detallescarrito")
+    private Long id_detallecarrito;
     @Column(name = "cantidad")
     private Double cantidad;
-    @Column(name = "precio")
-    private Double precio;
     @Column(name = "total")
     private Double total;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_orden")
-    private OrdenEntity ordenEntity;
+    @ManyToOne
+    @JoinColumn(name = "id_carrito")
+    private CarritoEntity carritoEntity;
+
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
     private ProductoEntity productoEntity;
+
 }
+    /*
+    @OneToMany(mappedBy = "detallesCarritoEntity", cascade = CascadeType.ALL, 
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DetallesCarrito_ProductoEntity> detallesCarrito_ProductoEntity;
+*/

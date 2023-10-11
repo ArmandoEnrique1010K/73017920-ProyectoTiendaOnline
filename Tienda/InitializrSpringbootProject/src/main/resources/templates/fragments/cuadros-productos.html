@@ -57,10 +57,10 @@
                         <!-- AÑADIR AL CARRITO -->
                         <div>
                             <form th:action = "@{/cart}" method="POST">
-                                <input type="hidden" th:value="${producto.id_producto}" name="id_producto">
+                                <input type="hidden" th:name="id_producto" th:value="${producto.id_producto}">
                                 <div>
                                     <!-- Cantidad: -->
-                                    <input type="hidden" id="cantidad" name="cantidad" min="1" value="1">
+                                    <input type="number" id="cantidad" name="cantidad" min="1" value="1">
                                 </div>
                                 <button type="submit">Añadir 1 unidad al carrito</button>
                             </form>

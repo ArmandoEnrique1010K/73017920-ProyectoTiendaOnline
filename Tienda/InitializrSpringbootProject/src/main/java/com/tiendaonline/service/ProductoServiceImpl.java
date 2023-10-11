@@ -149,6 +149,7 @@ public class ProductoServiceImpl implements ProductoService {
         productoExistente.setCategoriaEntity(productoEntity.getCategoriaEntity());
         productoExistente.setMarcaEntity(productoEntity.getMarcaEntity());
         productoExistente.setDetallesproductoEntity(productoEntity.getDetallesproductoEntity());
+        // productoExistente.getDetallesproductoEntity().getCaracteristicas();
 
         // 3. Manejar la imagen si se proporciona una nueva imagen en la solicitud
         MultipartFile nuevaImagen = productoEntity.getImagenProductoEntity().getImagen();

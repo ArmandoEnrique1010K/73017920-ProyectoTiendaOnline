@@ -11,25 +11,29 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Precio</th>
+                    <th>Precio real</th>
                     <th>Cantidad</th>
-                    <th>Total</th>
+                    <th>Total a pagar</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr th:each="dato_carrito : ${cart}">
-                    <td th:text="${dato_carrito.nombre}"></td>
-                    <td th:text="${dato_carrito.precio}"></td>
+            <tbody th:if="${carrito != null}">
+                <tr th:each="dato_carrito : ${carrito.detallesCarritoEntity}">
+                    <td th:text="${dato_carrito.productoEntity.nombre}"></td>
+                    <!-- <td th:text="${dato_carrito.productoEntity.preciooferta}"></td> -->
+                    <td>
+                        <span th:if="${dato_carrito.productoEntity.preciooferta == null}" th:text="${dato_carrito.productoEntity.precionormal}"></span>
+                        <span th:unless="${dato_carrito.productoEntity.preciooferta == null}" th:text="${dato_carrito.productoEntity.preciooferta}"></span>
+                    </td>
                     <td th:text="${dato_carrito.cantidad}"></td>
                     <td th:text="${dato_carrito.total}"></td>
                 </tr>
             </tbody>
             
         </table>
-        <div th:each="dato_orden : ${orden}">
+        <div th:each="dato_orden : ${carrito}">
             USTED DEBE PAGAR: <span th:text="${dato_orden.total_a_pagar}"></span>
         </div>
-        
+        Sesion:
         <div th:text="${sesion}">
             
         </div>

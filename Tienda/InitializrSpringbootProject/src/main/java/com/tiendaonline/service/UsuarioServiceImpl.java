@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    HttpSession session;
+
+    
     @Override
     public UsuarioEntity GuardarUsuario(UsuarioDto usuarioDto) {
 
@@ -57,6 +62,9 @@ public class UsuarioServiceImpl implements UsuarioService {
             .map(role -> role.getNombre())
             .collect(Collectors.toList());
     
+        // IDENTIFICADOR DEL USUARIO
+        session.setAttribute("identificadordelusuario", usuarioEntity.getId_usuario().toString());
+
         log.info("BIENVENIDO USUARIO: " + username);
         log.info("TIENE EL ROL DE: {}", roles);
 
